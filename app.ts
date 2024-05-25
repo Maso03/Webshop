@@ -1,9 +1,14 @@
 import { Hono } from 'hono'
 import { logger } from 'hono/logger'
-const app = new Hono()
+import { productsRoute } from './routes/products'
 
-app.use('*', logger())
+const app = new Hono();
 
-app.get('/test', (c) => c.text('Hono!'))
+app.use('*', logger());
 
-export default app
+app.get('/test', (c) => c.text('Hono!'));
+app.get('/moin', (c) => c.text('Hso!'));
+
+app.route("/products", productsRoute);
+
+export default app;
