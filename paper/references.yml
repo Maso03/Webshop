@@ -1,0 +1,51 @@
+# https://github.com/typst/hayagriva/blob/main/docs/file-format.md
+
+WF17:
+  type: article
+  title: Analysis on the Development and Bottlenecks of China's Cross - Border E – Commerce
+  author:
+    - Yue Hongfei  
+    - Wu Jiani
+    - Yao, Lin
+  organization: Studies in Asian Social Science
+  date: 2017
+  url:
+    date: 2024-05-26
+    value: https://www.unido.org/sites/default/files/2017-10/WP_17_2017.pdf
+
+
+B2B:
+  type: article
+  title: Online-Marketing Basics für B2B Praktische Handlungsempfehlungen und Best Practices
+  author:
+    - Lena-Maria Mikat
+    - Prof Dr. Monika Engelen
+  organization: TH Köln
+  date: 2018
+  url:
+    date: 2024-05-26
+    value: https://epb.bibl.th-koeln.de/frontdoor/deliver/index/docId/1152/file/PraxisPaper_Online+Marketing+für+B2B.pdf
+
+
+Dropshipping:
+  type: article
+  title: Dropshipping in E-Commerce - A Perspective
+  author:
+    - Gurpreet Singh
+    - Harjot Kaur
+    - Amitpal Singh
+  date: 2018
+  url:
+    date: 2024-05-26
+    value: https://dl.acm.org/doi/10.1145/3271972.3271993
+
+
+Ecommerce:
+  type: web
+  title: Anzahl der Transaktionen über PayPal weltweit vom 1. Quartal 2010 bis zum 1. Quartal 2024
+  author:
+    - Statista
+  date: 2024
+  url:
+    date: 2024-05-26
+    value: https://de.statista.com/statistik/daten/studie/300192/umfrage/transaktionen-ueber-paypal-weltweit-quartalszahlen/
