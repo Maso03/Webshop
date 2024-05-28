@@ -3,6 +3,7 @@ import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { db } from "../../db";
 import { products as productTable } from "../../db/schema/products";
+import { eq } from "drizzle-orm";
 
 const productSchema = z.object({
   id: z.number().int().positive().min(1),
@@ -32,22 +33,47 @@ export const productsRoute = new Hono()
 
     c.status(201);
     return c.json({ result });
-  });
-/*.get("/:id{[0-9]+}", (c) => {
+  })
+  .get("/:id{[0-9]+}", async (c) => {
     const id = Number.parseInt(c.req.param("id"));
-    const product = fakeProducts.find((product) => product.id === id);
+
+    const product = await db
+      .select()
+      .from(productTable)
+      .where(eq(productTable.productID, id));
+
     if (!product) {
       return c.notFound();
     }
     return c.json({ product });
   })
-  .delete("/:id{[0-9]+}", (c) => {
+
+  .delete("/:id{[0-9]+}", async (c) => {
     const id = Number.parseInt(c.req.param("id"));
-    const index = fakeProducts.findIndex((product) => product.id === id);
-    if (index === -1) {
+
+    const index = await db
+      .select()
+      .from(productTable)
+      .where(eq(productTable.productID, id));
+    if (!index) {
       return c.notFound();
     }
-    const deletedProduct = fakeProducts.splice(index, 1)[0];
+    const deletedProduct = await db
+      .delete(productTable) // Add the table name as an argument
+      .where(eq(productTable.productID, id))
+      .returning();
+
     return c.json({ product: deletedProduct });
-  });*/
-// .put
+  })
+  .put("/:id{[0-9]+}", zValidator("json", productSchema), async (c) => {
+    const id = Number.parseInt(c.req.param("id"));
+    const product = await c.req.valid("json");
+
+    const updatedProduct = await db
+      .update(productTable)
+      .set(product)
+      .where(eq(productTable.productID, id))
+      .returning();
+
+    return c.json({ product: updatedProduct });
+  });
