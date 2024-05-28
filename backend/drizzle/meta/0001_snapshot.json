@@ -1,0 +1,125 @@
+{
+  "version": "6",
+  "dialect": "sqlite",
+  "id": "3a3daec0-e093-4919-a41a-67b3d1bad994",
+  "prevId": "6b03c81f-6e5a-497f-a067-6ddefac24c39",
+  "tables": {
+    "productCategories": {
+      "name": "productCategories",
+      "columns": {
+        "CategoryID": {
+          "name": "CategoryID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "CategoryName": {
+          "name": "CategoryName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "Description": {
+          "name": "Description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "nameIdx": {
+          "name": "nameIdx",
+          "columns": [
+            "CategoryName"
+          ],
+          "isUnique": true
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "products": {
+      "name": "products",
+      "columns": {
+        "productID": {
+          "name": "productID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "productName": {
+          "name": "productName",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "price": {
+          "name": "price",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "availability": {
+          "name": "availability",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "categoryID": {
+          "name": "categoryID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "categoryIdIndex": {
+          "name": "categoryIdIndex",
+          "columns": [
+            "categoryID"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "products_categoryID_productCategories_CategoryID_fk": {
+          "name": "products_categoryID_productCategories_CategoryID_fk",
+          "tableFrom": "products",
+          "tableTo": "productCategories",
+          "columnsFrom": [
+            "categoryID"
+          ],
+          "columnsTo": [
+            "CategoryID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    }
+  },
+  "enums": {},
+  "_meta": {
+    "schemas": {},
+    "tables": {},
+    "columns": {}
+  }
+}

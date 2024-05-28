@@ -1,0 +1,28 @@
+{
+  "name": "webshop",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "bun src/index.ts",
+    "dev": "bun --watch src/index.ts",
+    "format": "prettier -w ."
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "drizzle-kit": "^0.21.4",
+    "prettier": "^3.2.5"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@hono/zod-validator": "^0.2.1",
+    "@kinde-oss/kinde-typescript-sdk": "^2.9.1",
+    "better-sqlite3": "^10.0.0",
+    "drizzle-orm": "^0.30.10",
+    "hono": "^4.3.9",
+    "node": "18",
+    "nodejs": "^0.0.0",
+    "zod": "^3.23.8"
+  }
+}
