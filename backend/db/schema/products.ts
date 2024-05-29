@@ -15,9 +15,9 @@ export const products = sqliteTable(
     description: text("description"),
     price: numeric("price").notNull(),
     availability: integer("availability"),
-    categoryID: integer("categoryID").references(
-      () => productCategories.categoryID
-    ),
+    categoryID: integer("categoryID")
+      .references(() => productCategories.categoryID)
+      .notNull(),
   },
   (products) => {
     return {

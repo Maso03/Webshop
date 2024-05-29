@@ -12,7 +12,7 @@ export const productCategories = sqliteTable(
   "productCategories",
   {
     categoryID: integer("CategoryID").primaryKey(),
-    categoryName: text("CategoryName"),
+    categoryName: text("CategoryName").notNull(),
     description: text("Description"),
   },
   (productCategories) => ({

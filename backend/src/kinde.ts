@@ -18,8 +18,14 @@ export const kindeClient = createKindeServerClient(
     clientSecret: process.env.KINDE_CLIENT_SECRET!,
     redirectURL: process.env.KINDE_REDIRECT_URI!,
     logoutRedirectURL: process.env.KINDE_LOGOUT_REDIRECT_URI!,
-  },
+  }
 );
+export interface CustomSessionManager {
+  getSessionItem(key: string): Promise<string | null>;
+  setSessionItem(key: string, value: string): Promise<void>;
+  removeSessionItem(key: string): Promise<void>;
+  destroySession(): Promise<void>;
+}
 
 let store: Record<string, unknown> = {};
 

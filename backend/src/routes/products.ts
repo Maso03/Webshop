@@ -9,6 +9,7 @@ const productSchema = z.object({
   id: z.number().int().positive().min(1),
   productName: z.string().min(2).max(255),
   price: z.string(),
+  categoryID: z.number().int().positive().min(1),
 });
 
 type Products = z.infer<typeof productSchema>;
