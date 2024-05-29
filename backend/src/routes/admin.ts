@@ -2,7 +2,9 @@ import { Hono, type Context, type Next } from "hono";
 import { kindeClient, sessionManager } from "../kinde";
 
 const adminRoute = new Hono();
+let accessToken: string | undefined;
 
+// Middleware zur Berechtigungsprüfung
 // Middleware zur Berechtigungsprüfung
 const checkIsAdmin = async (c: Context, next: Next) => {
   try {
@@ -13,35 +15,14 @@ const checkIsAdmin = async (c: Context, next: Next) => {
       return c.json({ error: "Unauthorized" }, 401);
     }
 
-    const accessToken = process.env.access_token; // Der Zugriffstoken sollte sicher gespeichert und abgerufen werden
-
-    const headers = {
-      Accept: "application/json",
-      Authorization: `Bearer ${accessToken}`,
-    };
-
-    const response = await fetch(
-      `https://webshop.kinde.com/api/v1/permissions`,
-      {
-        method: "GET",
-        headers: headers,
-      }
-    );
-
-    if (!response.ok) {
-      return c.json({ error: "Unauthorized" }, 403);
-    }
-
-    const body = await response.json();
-    const permissions = body.permissions;
-
-    // Ausgabe der Berechtigungen zur Überprüfung
+    const permissions = await kindeClient.getPermissions(manager);
     console.log("User Permissions:", permissions);
 
-    const hasPermission = permissions.some(
-      (perm: { key: string }) => perm.key === "isadmin"
+    const hasPermission = permissions.permissions.some(
+      (perm: string) => perm === "isadmin"
     );
     console.log("Has permission:", hasPermission);
+
     if (!hasPermission) {
       return c.json({ error: "Forbidden" }, 403);
     }
@@ -56,7 +37,7 @@ const checkIsAdmin = async (c: Context, next: Next) => {
 export { checkIsAdmin };
 
 adminRoute
-  .use("/users", checkIsAdmin)
+  .use(checkIsAdmin)
   .get("/users", async (c) => {
     try {
       const accessToken = process.env.access_token;
