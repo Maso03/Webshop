@@ -9,27 +9,25 @@ CREATE TABLE `cartItems` (
 --> statement-breakpoint
 CREATE TABLE `orderHistory` (
 	`historyID` integer PRIMARY KEY NOT NULL,
-	`userID` integer NOT NULL,
+	`userID` text NOT NULL,
 	`orderID` integer NOT NULL,
 	`status` text NOT NULL,
 	`date` text DEFAULT (current_timestamp) NOT NULL,
-	FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON UPDATE no action ON DELETE no action,
 	FOREIGN KEY (`orderID`) REFERENCES `orders`(`orderID`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `orders` (
 	`orderID` integer PRIMARY KEY NOT NULL,
-	`userID` integer NOT NULL,
+	`userID` text NOT NULL,
 	`orderDate` text DEFAULT (current_timestamp) NOT NULL,
 	`totalPrice` integer NOT NULL,
 	`shippingAddress` text NOT NULL,
-	`paymentStatus` text NOT NULL,
-	FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON UPDATE no action ON DELETE no action
+	`paymentStatus` text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE `productCategories` (
 	`CategoryID` integer PRIMARY KEY NOT NULL,
-	`CategoryName` text,
+	`CategoryName` text NOT NULL,
 	`Description` text
 );
 --> statement-breakpoint
@@ -39,34 +37,35 @@ CREATE TABLE `products` (
 	`description` text,
 	`price` numeric NOT NULL,
 	`availability` integer,
-	`categoryID` integer,
+	`categoryID` integer NOT NULL,
 	FOREIGN KEY (`categoryID`) REFERENCES `productCategories`(`CategoryID`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `shippingAddresses` (
 	`addressID` integer PRIMARY KEY NOT NULL,
-	`userID` integer NOT NULL,
+	`userID` text NOT NULL,
 	`address` text NOT NULL,
 	`city` text NOT NULL,
 	`postalCode` text NOT NULL,
-	`country` text NOT NULL,
-	FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON UPDATE no action ON DELETE no action
+	`country` text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE `shoppingCart` (
 	`cartID` integer PRIMARY KEY NOT NULL,
-	`userID` integer NOT NULL,
-	FOREIGN KEY (`userID`) REFERENCES `users`(`userID`) ON UPDATE no action ON DELETE no action
+	`userID` text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE `users` (
-	`userID` integer PRIMARY KEY NOT NULL,
+	`userID` text PRIMARY KEY NOT NULL,
 	`userName` text NOT NULL,
 	`email` text NOT NULL,
 	`password` text NOT NULL,
 	`createdAt` text DEFAULT (current_timestamp) NOT NULL
 );
 --> statement-breakpoint
+CREATE INDEX `userIdIndex1` ON `orders` (`userID`);--> statement-breakpoint
 CREATE UNIQUE INDEX `nameIdx` ON `productCategories` (`CategoryName`);--> statement-breakpoint
 CREATE INDEX `categoryIdIndex` ON `products` (`categoryID`);--> statement-breakpoint
+CREATE INDEX `userIdIndex2` ON `shippingAddresses` (`userID`);--> statement-breakpoint
+CREATE INDEX `userIdIndex3` ON `shoppingCart` (`userID`);--> statement-breakpoint
 CREATE UNIQUE INDEX `emailIndex` ON `users` (`email`);

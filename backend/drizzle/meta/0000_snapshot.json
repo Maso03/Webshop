@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "4610ad59-ce0c-4096-b2cc-f68bc4cec392",
+  "id": "c6511aa0-e2b6-4475-aa76-e39c07e4d2bf",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "cartItems": {
@@ -80,7 +80,7 @@
         },
         "userID": {
           "name": "userID",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -110,19 +110,6 @@
       },
       "indexes": {},
       "foreignKeys": {
-        "orderHistory_userID_users_userID_fk": {
-          "name": "orderHistory_userID_users_userID_fk",
-          "tableFrom": "orderHistory",
-          "tableTo": "users",
-          "columnsFrom": [
-            "userID"
-          ],
-          "columnsTo": [
-            "userID"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
         "orderHistory_orderID_orders_orderID_fk": {
           "name": "orderHistory_orderID_orders_orderID_fk",
           "tableFrom": "orderHistory",
@@ -152,7 +139,7 @@
         },
         "userID": {
           "name": "userID",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -187,22 +174,16 @@
           "autoincrement": false
         }
       },
-      "indexes": {},
-      "foreignKeys": {
-        "orders_userID_users_userID_fk": {
-          "name": "orders_userID_users_userID_fk",
-          "tableFrom": "orders",
-          "tableTo": "users",
-          "columnsFrom": [
+      "indexes": {
+        "userIdIndex1": {
+          "name": "userIdIndex1",
+          "columns": [
             "userID"
           ],
-          "columnsTo": [
-            "userID"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "isUnique": false
         }
       },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -220,7 +201,7 @@
           "name": "CategoryName",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "Description": {
@@ -286,7 +267,7 @@
           "name": "categoryID",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         }
       },
@@ -329,7 +310,7 @@
         },
         "userID": {
           "name": "userID",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -363,22 +344,16 @@
           "autoincrement": false
         }
       },
-      "indexes": {},
-      "foreignKeys": {
-        "shippingAddresses_userID_users_userID_fk": {
-          "name": "shippingAddresses_userID_users_userID_fk",
-          "tableFrom": "shippingAddresses",
-          "tableTo": "users",
-          "columnsFrom": [
+      "indexes": {
+        "userIdIndex2": {
+          "name": "userIdIndex2",
+          "columns": [
             "userID"
           ],
-          "columnsTo": [
-            "userID"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "isUnique": false
         }
       },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -394,28 +369,22 @@
         },
         "userID": {
           "name": "userID",
-          "type": "integer",
+          "type": "text",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         }
       },
-      "indexes": {},
-      "foreignKeys": {
-        "shoppingCart_userID_users_userID_fk": {
-          "name": "shoppingCart_userID_users_userID_fk",
-          "tableFrom": "shoppingCart",
-          "tableTo": "users",
-          "columnsFrom": [
+      "indexes": {
+        "userIdIndex3": {
+          "name": "userIdIndex3",
+          "columns": [
             "userID"
           ],
-          "columnsTo": [
-            "userID"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "isUnique": false
         }
       },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
@@ -424,7 +393,7 @@
       "columns": {
         "userID": {
           "name": "userID",
-          "type": "integer",
+          "type": "text",
           "primaryKey": true,
           "notNull": true,
           "autoincrement": false

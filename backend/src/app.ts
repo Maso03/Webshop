@@ -4,6 +4,10 @@ import { serveStatic } from "hono/bun";
 import { productsRoute } from "./routes/products";
 import { authRoute } from "./routes/auth";
 import { adminRoute } from "./routes/admin";
+import { productCategoriesRoute } from "./routes/productCategories";
+import { shoppingCartRoute } from "./routes/shoppingCart";
+import { createShoppingCartRoute } from "./routes/createShoppingCart";
+
 const app = new Hono();
 
 app.use("*", logger());
@@ -15,7 +19,10 @@ const apiRoutes = app
   .basePath("/api")
   .route("/products", productsRoute)
   .route("/", authRoute)
-  .route("/admin", adminRoute);
+  .route("/admin", adminRoute)
+  .route("/productCatogory", productCategoriesRoute)
+  .route("/shoppingCart", shoppingCartRoute)
+  .route("/createShoppingCart", createShoppingCartRoute);
 
 app.use("*", serveStatic({ root: ".frontend/dist" }));
 app.get("*", serveStatic({ path: "./frontend/dist/index.html" }));

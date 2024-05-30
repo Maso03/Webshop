@@ -5,9 +5,7 @@ import { sql } from "drizzle-orm";
 
 export const orderHistory = sqliteTable("orderHistory", {
   historyID: integer("historyID").primaryKey(),
-  userID: integer("userID")
-    .references(() => users.userID)
-    .notNull(),
+  userID: text("userID").notNull(),
   orderID: integer("orderID")
     .references(() => orders.orderID)
     .notNull(),

@@ -3,13 +3,16 @@ import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 import { db } from "../../db";
 import { products as productTable } from "../../db/schema/products";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
+import { getUser } from "../kinde";
 
 const productSchema = z.object({
   id: z.number().int().positive().min(1),
   productName: z.string().min(2).max(255),
+  description: z.string().max(255).optional(),
   price: z.string(),
   categoryID: z.number().int().positive().min(1),
+  availability: z.number().int(),
 });
 
 type Products = z.infer<typeof productSchema>;
@@ -24,7 +27,6 @@ export const productsRoute = new Hono()
   })
   .post("/", zValidator("json", createPostSchema), async (c) => {
     const product = await c.req.valid("json");
-
     const result = await db
       .insert(productTable)
       .values({
