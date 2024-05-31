@@ -3,6 +3,7 @@ CREATE TABLE `cartItems` (
 	`cartID` integer NOT NULL,
 	`productID` integer NOT NULL,
 	`quantity` integer NOT NULL,
+	`unitPrice` integer NOT NULL,
 	FOREIGN KEY (`cartID`) REFERENCES `shoppingCart`(`cartID`) ON UPDATE no action ON DELETE no action,
 	FOREIGN KEY (`productID`) REFERENCES `products`(`productID`) ON UPDATE no action ON DELETE no action
 );
@@ -11,9 +12,19 @@ CREATE TABLE `orderHistory` (
 	`historyID` integer PRIMARY KEY NOT NULL,
 	`userID` text NOT NULL,
 	`orderID` integer NOT NULL,
-	`status` text NOT NULL,
+	`status` text,
 	`date` text DEFAULT (current_timestamp) NOT NULL,
 	FOREIGN KEY (`orderID`) REFERENCES `orders`(`orderID`) ON UPDATE no action ON DELETE no action
+);
+--> statement-breakpoint
+CREATE TABLE `orderPositions` (
+	`orderPositionID` integer PRIMARY KEY NOT NULL,
+	`orderID` integer NOT NULL,
+	`productID` integer NOT NULL,
+	`quantity` integer NOT NULL,
+	`unitPrice` numeric NOT NULL,
+	FOREIGN KEY (`orderID`) REFERENCES `orders`(`orderID`) ON UPDATE no action ON DELETE no action,
+	FOREIGN KEY (`productID`) REFERENCES `products`(`productID`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `orders` (
@@ -21,8 +32,9 @@ CREATE TABLE `orders` (
 	`userID` text NOT NULL,
 	`orderDate` text DEFAULT (current_timestamp) NOT NULL,
 	`totalPrice` integer NOT NULL,
-	`shippingAddress` text NOT NULL,
-	`paymentStatus` text NOT NULL
+	`shippingAddress` integer NOT NULL,
+	`paymentStatus` text NOT NULL,
+	FOREIGN KEY (`shippingAddress`) REFERENCES `shippingAddresses`(`addressID`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
 CREATE TABLE `productCategories` (
@@ -63,6 +75,10 @@ CREATE TABLE `users` (
 	`createdAt` text DEFAULT (current_timestamp) NOT NULL
 );
 --> statement-breakpoint
+CREATE INDEX `userIdIndex4` ON `orderHistory` (`userID`);--> statement-breakpoint
+CREATE INDEX `orderIdIndex1` ON `orderHistory` (`orderID`);--> statement-breakpoint
+CREATE INDEX `orderIdIndex2` ON `orderPositions` (`orderID`);--> statement-breakpoint
+CREATE INDEX `productIdIndex` ON `orderPositions` (`productID`);--> statement-breakpoint
 CREATE INDEX `userIdIndex1` ON `orders` (`userID`);--> statement-breakpoint
 CREATE UNIQUE INDEX `nameIdx` ON `productCategories` (`CategoryName`);--> statement-breakpoint
 CREATE INDEX `categoryIdIndex` ON `products` (`categoryID`);--> statement-breakpoint

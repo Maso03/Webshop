@@ -37,6 +37,7 @@ const shoppingcart = z.object({
   cartID: z.number().int().positive(),
   productID: z.number().int().positive(),
   quantity: z.number().int().positive().min(1),
+  unitPrice: z.number().int().positive().min(1),
 });
 
 const createPostSchema = shoppingcart.omit({ cartItemID: true });
@@ -45,7 +46,7 @@ export const shoppingCartRoute = new Hono()
   // .use(checkIsAuthenticated)
   // Hier können Sie Ihre Routen für den Warenkorb hinzufügen
   // z.B. eine Route zum Hinzufügen von Produkten zum Warenkorb
-  .post("/", getUser, zValidator("json", createPostSchema), async (c) => {
+  .post("/", zValidator("json", createPostSchema), async (c) => {
     const cartshopping = await c.req.valid("json");
 
     const result = await db
@@ -70,6 +71,7 @@ export const shoppingCartRoute = new Hono()
         productID: cartItemsTable.productID,
         productName: productTable.productName,
         quantity: cartItemsTable.quantity,
+        unitPrice: cartItemsTable.unitPrice,
       })
       .from(shoppingCartTable)
       .innerJoin(
@@ -96,6 +98,7 @@ export const shoppingCartRoute = new Hono()
               productID: cart.productID,
               productName: cart.productName,
               quantity: cart.quantity,
+              unitPrice: cart.unitPrice,
             },
           ],
         });
@@ -104,6 +107,7 @@ export const shoppingCartRoute = new Hono()
           productID: cart.productID,
           productName: cart.productName,
           quantity: cart.quantity,
+          unitPrice: cart.unitPrice,
         });
       }
     }

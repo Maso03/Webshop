@@ -7,6 +7,7 @@ import {
 } from "drizzle-orm/sqlite-core";
 import { users } from "./users"; // Importiere die Referenz-Tabelle für Benutzer
 import { sql } from "drizzle-orm";
+import { shippingAddresses } from "./shippingAddresses"; // Importiere die Referenz-Tabelle für Versandadressen
 
 export const orders = sqliteTable(
   "orders",
@@ -17,7 +18,9 @@ export const orders = sqliteTable(
       .notNull()
       .default(sql`(current_timestamp)`), // timestamp als Text gespeichert
     totalPrice: integer("totalPrice").notNull(),
-    shippingAddress: text("shippingAddress").notNull(),
+    addressID: integer("shippingAddress")
+      .references(() => shippingAddresses.addressID)
+      .notNull(),
     paymentStatus: text("paymentStatus").notNull(),
   },
   (orders) => {

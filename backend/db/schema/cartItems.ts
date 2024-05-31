@@ -11,4 +11,5 @@ export const cartItems = sqliteTable("cartItems", {
     .references(() => products.productID)
     .notNull(),
   quantity: integer("quantity").notNull(),
+  unitPrice: integer("unitPrice").notNull(),
 });

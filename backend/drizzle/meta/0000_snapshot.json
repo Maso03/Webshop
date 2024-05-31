@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "c6511aa0-e2b6-4475-aa76-e39c07e4d2bf",
+  "id": "9edd1aed-31fb-4068-afab-51a2958182c0",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "cartItems": {
@@ -30,6 +30,13 @@
         },
         "quantity": {
           "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "unitPrice": {
+          "name": "unitPrice",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -96,7 +103,7 @@
           "name": "status",
           "type": "text",
           "primaryKey": false,
-          "notNull": true,
+          "notNull": false,
           "autoincrement": false
         },
         "date": {
@@ -108,7 +115,22 @@
           "default": "(current_timestamp)"
         }
       },
-      "indexes": {},
+      "indexes": {
+        "userIdIndex4": {
+          "name": "userIdIndex4",
+          "columns": [
+            "userID"
+          ],
+          "isUnique": false
+        },
+        "orderIdIndex1": {
+          "name": "orderIdIndex1",
+          "columns": [
+            "orderID"
+          ],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {
         "orderHistory_orderID_orders_orderID_fk": {
           "name": "orderHistory_orderID_orders_orderID_fk",
@@ -119,6 +141,92 @@
           ],
           "columnsTo": [
             "orderID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "orderPositions": {
+      "name": "orderPositions",
+      "columns": {
+        "orderPositionID": {
+          "name": "orderPositionID",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "orderID": {
+          "name": "orderID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "productID": {
+          "name": "productID",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "unitPrice": {
+          "name": "unitPrice",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "orderIdIndex2": {
+          "name": "orderIdIndex2",
+          "columns": [
+            "orderID"
+          ],
+          "isUnique": false
+        },
+        "productIdIndex": {
+          "name": "productIdIndex",
+          "columns": [
+            "productID"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "orderPositions_orderID_orders_orderID_fk": {
+          "name": "orderPositions_orderID_orders_orderID_fk",
+          "tableFrom": "orderPositions",
+          "tableTo": "orders",
+          "columnsFrom": [
+            "orderID"
+          ],
+          "columnsTo": [
+            "orderID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "orderPositions_productID_products_productID_fk": {
+          "name": "orderPositions_productID_products_productID_fk",
+          "tableFrom": "orderPositions",
+          "tableTo": "products",
+          "columnsFrom": [
+            "productID"
+          ],
+          "columnsTo": [
+            "productID"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -161,7 +269,7 @@
         },
         "shippingAddress": {
           "name": "shippingAddress",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -183,7 +291,21 @@
           "isUnique": false
         }
       },
-      "foreignKeys": {},
+      "foreignKeys": {
+        "orders_shippingAddress_shippingAddresses_addressID_fk": {
+          "name": "orders_shippingAddress_shippingAddresses_addressID_fk",
+          "tableFrom": "orders",
+          "tableTo": "shippingAddresses",
+          "columnsFrom": [
+            "shippingAddress"
+          ],
+          "columnsTo": [
+            "addressID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },

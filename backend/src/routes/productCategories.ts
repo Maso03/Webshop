@@ -24,7 +24,8 @@ export const productCategoriesRoute = new Hono()
       .select({
         categoryID: productCategoryTable.categoryID,
         categoryName: productCategoryTable.categoryName,
-        description: productTable.description,
+        description: productCategoryTable.description,
+        description_product: productTable.description,
         productID: productTable.productID,
         productName: productTable.productName,
         price: productTable.price,
@@ -47,13 +48,14 @@ export const productCategoriesRoute = new Hono()
         formattedProductCategories.push({
           categoryID: product.categoryID,
           categoryName: product.categoryName,
+          description: product.description,
           products: [
             {
               productID: product.productID,
               productName: product.productName,
               price: product.price,
               availability: product.availability,
-              description: product.description,
+              description_product: product.description_product,
             },
           ],
         });
@@ -63,7 +65,7 @@ export const productCategoriesRoute = new Hono()
           productName: product.productName,
           price: product.price,
           availability: product.availability,
-          description: product.description,
+          description_product: product.description_product,
         });
       }
     }
