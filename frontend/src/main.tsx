@@ -8,6 +8,7 @@ import Products from "./components/Products";
 import Login from "./components/Login";
 import User from "./components/User";
 import Contact from "./components/Contact";
+import ProductDetail from "./components/ProductDetail";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -18,6 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
       </Routes>
     </Router>
   </React.StrictMode>
