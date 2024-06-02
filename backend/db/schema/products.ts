@@ -3,9 +3,10 @@ import {
   text,
   integer,
   numeric,
+  blob,
   index,
 } from "drizzle-orm/sqlite-core";
-import { productCategories } from "./productCategories.ts"; // Importiere die Referenz-Tabelle für Kategorien
+import { productCategories } from "./productCategories.ts";
 
 export const products = sqliteTable(
   "products",
@@ -18,6 +19,7 @@ export const products = sqliteTable(
     categoryID: integer("categoryID")
       .references(() => productCategories.categoryID)
       .notNull(),
+    image: blob("image"), // Hinzufügen der BLOB-Spalte
   },
   (products) => {
     return {

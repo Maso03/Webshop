@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "9edd1aed-31fb-4068-afab-51a2958182c0",
+  "id": "36d3e8b9-0783-4807-a83f-d31e34a413e1",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "cartItems": {
@@ -182,7 +182,7 @@
         },
         "unitPrice": {
           "name": "unitPrice",
-          "type": "numeric",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -390,6 +390,13 @@
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
+          "autoincrement": false
+        },
+        "image": {
+          "name": "image",
+          "type": "blob",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         }
       },

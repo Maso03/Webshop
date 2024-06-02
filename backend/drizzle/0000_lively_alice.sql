@@ -22,7 +22,7 @@ CREATE TABLE `orderPositions` (
 	`orderID` integer NOT NULL,
 	`productID` integer NOT NULL,
 	`quantity` integer NOT NULL,
-	`unitPrice` numeric NOT NULL,
+	`unitPrice` integer NOT NULL,
 	FOREIGN KEY (`orderID`) REFERENCES `orders`(`orderID`) ON UPDATE no action ON DELETE no action,
 	FOREIGN KEY (`productID`) REFERENCES `products`(`productID`) ON UPDATE no action ON DELETE no action
 );
@@ -50,6 +50,7 @@ CREATE TABLE `products` (
 	`price` numeric NOT NULL,
 	`availability` integer,
 	`categoryID` integer NOT NULL,
+	`image` blob,
 	FOREIGN KEY (`categoryID`) REFERENCES `productCategories`(`CategoryID`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
