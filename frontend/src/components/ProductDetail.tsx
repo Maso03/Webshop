@@ -4,7 +4,7 @@ import NavBar from "./NavBar";
 import Footer from "./Footer";
 
 interface Product {
-  id: number;
+  productID: number;
   productName: string;
   description?: string;
   price: string;
@@ -21,8 +21,16 @@ const ProductDetail: React.FC = () => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(`/api/products/${id}`);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
         const data = await response.json();
-        setProduct(data.product);
+        console.log("Fetched data:", data); // Log the response to debug
+        if (data && data.product && data.product.length > 0) {
+          setProduct(data.product[0]); // Extract the first element
+        } else {
+          setProduct(null);
+        }
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -32,6 +40,8 @@ const ProductDetail: React.FC = () => {
 
     fetchProduct();
   }, [id]);
+
+  const handleAddToCart = () => {};
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center">
@@ -44,11 +54,17 @@ const ProductDetail: React.FC = () => {
             <h2 className="text-4xl font-bold mb-4">{product.productName}</h2>
             <p className="text-gray-600 mb-4">{product.description}</p>
             <p className="text-green-500 font-bold text-2xl mb-4">
-              {product.price}
+              {product.price} €
             </p>
             <p className="text-gray-500">
               Availability: {product.availability}
             </p>
+            <button
+              onClick={handleAddToCart}
+              className="mt-6 px-4 py-2 bg-green-500 text-white font-bold rounded hover:bg-green-600"
+            >
+              Add to cart
+            </button>
           </div>
         ) : (
           <p>Product not found.</p>

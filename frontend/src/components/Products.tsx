@@ -53,7 +53,7 @@ const Products: React.FC = () => {
               >
                 <h3 className="text-xl font-bold">{product.productName}</h3>
                 <p className="text-gray-700">{product.description}</p>
-                <p className="text-green-500 font-bold">{product.price}</p>
+                <p className="text-green-500 font-bold">{product.price}€</p>
                 <p className="text-gray-500">
                   Availability: {product.availability}
                 </p>
