@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
@@ -15,14 +15,24 @@ interface Product {
 const Products: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const searchTerm = searchParams.get("search") || "";
 
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await fetch("/api/products");
         const data = await response.json();
-        setProducts(data.products);
-        console.log(data.products); // Log products to the console
+        let filteredProducts = data.products;
+        console.log(searchTerm);
+        if (searchTerm) {
+          filteredProducts = data.products.filter((product: Product) =>
+            product.productName.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        }
+        setProducts(filteredProducts);
+        console.log(filteredProducts); // Log filtered products to the console
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {
@@ -31,7 +41,7 @@ const Products: React.FC = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [searchTerm]);
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center">
@@ -48,7 +58,7 @@ const Products: React.FC = () => {
             {products.map((product) => (
               <Link
                 key={product.productID}
-                to={`/products/${product.productID}`}
+                to={`/product/${product.productID}`}
                 className="bg-white p-4 rounded shadow hover:shadow-lg"
               >
                 <h3 className="text-xl font-bold">{product.productName}</h3>

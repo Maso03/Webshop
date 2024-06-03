@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/login" element={<Login />} />
         <Route path="/user" element={<User />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/products/:id" element={<ProductDetail />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
       </Routes>
     </Router>
   </React.StrictMode>
