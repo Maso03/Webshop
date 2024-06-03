@@ -10,6 +10,7 @@ interface Product {
   price: string;
   categoryID: number;
   availability: number;
+  image?: string;
 }
 
 const ProductDetail: React.FC = () => {
@@ -26,8 +27,8 @@ const ProductDetail: React.FC = () => {
         }
         const data = await response.json();
         console.log("Fetched data:", data); // Log the response to debug
-        if (data && data.product && data.product.length > 0) {
-          setProduct(data.product[0]); // Extract the first element
+        if (data && data.product) {
+          setProduct(data.product); // Extract the first element
         } else {
           setProduct(null);
         }
@@ -56,9 +57,16 @@ const ProductDetail: React.FC = () => {
             <p className="text-green-500 font-bold text-2xl mb-4">
               {product.price} €
             </p>
-            <p className="text-gray-500">
+            <p className="text-gray-500 mb-4">
               Availability: {product.availability}
             </p>
+            {product.image && (
+              <img
+                src={product.image}
+                alt={product.productName}
+                className="mb-4 max-w-full h-auto"
+              />
+            )}
             <button
               onClick={handleAddToCart}
               className="mt-6 px-4 py-2 bg-green-500 text-white font-bold rounded hover:bg-green-600"
