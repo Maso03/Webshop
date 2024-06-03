@@ -37,7 +37,7 @@ const checkIsAdmin = async (c: Context, next: Next) => {
 export { checkIsAdmin };
 
 adminRoute
-  .use(checkIsAdmin)
+  // .use(checkIsAdmin)
   .get("/users", async (c) => {
     try {
       const accessToken = process.env.access_token;
@@ -187,6 +187,46 @@ adminRoute
 
       const body = await response.json();
       return c.json({ message: "User deleted successfully", user: body });
+    } catch (error) {
+      console.error("Internal server error:", error);
+      return c.json({ error: "Internal Server Error" }, 500);
+    }
+  })
+  .put("/updateuser/:id", async (c) => {
+    try {
+      const userId = c.req.param("id"); // Benutzer-ID aus der URL extrahieren
+      const inputBody = await c.req.json(); // Den Body-Inhalt aus dem Request lesen
+      const accessToken = process.env.access_token;
+
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      };
+
+      const response = await fetch(
+        `https://webshop.kinde.com/api/v1/user?id=${userId}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify(inputBody), // Den dynamischen Body übergeben
+          headers: headers,
+        }
+      );
+      if (!response.ok) {
+        const errorDetails = await response.json();
+        console.error(
+          "Failed to update user:",
+          response.status,
+          response.statusText,
+          errorDetails
+        );
+        return c.json({
+          error: "Failed to update user",
+          details: errorDetails,
+        });
+      }
+      const body = await response.json();
+      return c.json({ message: "User updated successfully", user: body });
     } catch (error) {
       console.error("Internal server error:", error);
       return c.json({ error: "Internal Server Error" }, 500);
