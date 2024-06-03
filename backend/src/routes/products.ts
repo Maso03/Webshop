@@ -61,31 +61,36 @@ export const productsRoute = new Hono()
       return c.status(404);
     }
 
-    // Überprüfen, ob das Bild als base64-String gespeichert ist
-    let imageBase64String = product[0].image as string; // Hier wird der Typ zu string geändert
-    if (typeof imageBase64String !== "string") {
-      // Wenn das Bild als Byte-Array gespeichert ist, muss es in einen base64-String umgewandelt werden
-      const buffer = Buffer.from(imageBase64String);
-      imageBase64String = buffer.toString("base64");
-    }
+    let imageBase64String: string | undefined;
+    if (product[0].image) {
+      // Überprüfen, ob das Bild als base64-String gespeichert ist
+      imageBase64String = product[0].image as string;
+      if (typeof imageBase64String !== "string") {
+        // Wenn das Bild als Byte-Array gespeichert ist, muss es in einen base64-String umgewandelt werden
+        const buffer = Buffer.from(imageBase64String);
+        imageBase64String = buffer.toString("base64");
+      }
 
-    // Überprüfen, ob der base64-String eine PNG-Datei repräsentiert
-    const decodedImage = Buffer.from(imageBase64String, "base64");
-    const isPNG =
-      decodedImage[0] === 0x89 &&
-      decodedImage[1] === 0x50 &&
-      decodedImage[2] === 0x4e &&
-      decodedImage[3] === 0x47;
-    if (!isPNG) {
-      // Wenn der base64-String keine PNG-Datei repräsentiert, wird ein Fehler zurückgegeben
-      return c.status(400);
+      // Überprüfen, ob der base64-String eine PNG-Datei repräsentiert
+      const decodedImage = Buffer.from(imageBase64String, "base64");
+      const isPNG =
+        decodedImage[0] === 0x89 &&
+        decodedImage[1] === 0x50 &&
+        decodedImage[2] === 0x4e &&
+        decodedImage[3] === 0x47;
+      if (!isPNG) {
+        // Wenn der base64-String keine PNG-Datei repräsentiert, wird ein Fehler zurückgegeben
+        return c.status(400);
+      }
     }
 
     // Wenn alles in Ordnung ist, wird das Produkt mit dem base64-codierten PNG-Bild an den Client zurückgesendet
     return c.json({
       product: {
         ...product[0],
-        image: `data:image/png;base64,${imageBase64String}`,
+        ...(imageBase64String && {
+          image: `data:image/png;base64,${imageBase64String}`,
+        }),
       },
     });
   })
