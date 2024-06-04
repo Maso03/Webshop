@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "36d3e8b9-0783-4807-a83f-d31e34a413e1",
+  "id": "d9a53d27-7785-4922-9425-115d55f8e5f3",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "cartItems": {
@@ -34,16 +34,24 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
-        },
-        "unitPrice": {
-          "name": "unitPrice",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
         }
       },
-      "indexes": {},
+      "indexes": {
+        "cartIdIndex1": {
+          "name": "cartIdIndex1",
+          "columns": [
+            "cartID"
+          ],
+          "isUnique": false
+        },
+        "productIdIndex1": {
+          "name": "productIdIndex1",
+          "columns": [
+            "productID"
+          ],
+          "isUnique": false
+        }
+      },
       "foreignKeys": {
         "cartItems_cartID_shoppingCart_cartID_fk": {
           "name": "cartItems_cartID_shoppingCart_cartID_fk",
@@ -116,15 +124,15 @@
         }
       },
       "indexes": {
-        "userIdIndex4": {
-          "name": "userIdIndex4",
+        "userIdIndex5": {
+          "name": "userIdIndex5",
           "columns": [
             "userID"
           ],
           "isUnique": false
         },
-        "orderIdIndex1": {
-          "name": "orderIdIndex1",
+        "orderPositionIdIndex1": {
+          "name": "orderPositionIdIndex1",
           "columns": [
             "orderID"
           ],
@@ -132,101 +140,15 @@
         }
       },
       "foreignKeys": {
-        "orderHistory_orderID_orders_orderID_fk": {
-          "name": "orderHistory_orderID_orders_orderID_fk",
+        "orderHistory_orderID_orders_ordersID_fk": {
+          "name": "orderHistory_orderID_orders_ordersID_fk",
           "tableFrom": "orderHistory",
           "tableTo": "orders",
           "columnsFrom": [
             "orderID"
           ],
           "columnsTo": [
-            "orderID"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "orderPositions": {
-      "name": "orderPositions",
-      "columns": {
-        "orderPositionID": {
-          "name": "orderPositionID",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "orderID": {
-          "name": "orderID",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "productID": {
-          "name": "productID",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "quantity": {
-          "name": "quantity",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "unitPrice": {
-          "name": "unitPrice",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        }
-      },
-      "indexes": {
-        "orderIdIndex2": {
-          "name": "orderIdIndex2",
-          "columns": [
-            "orderID"
-          ],
-          "isUnique": false
-        },
-        "productIdIndex": {
-          "name": "productIdIndex",
-          "columns": [
-            "productID"
-          ],
-          "isUnique": false
-        }
-      },
-      "foreignKeys": {
-        "orderPositions_orderID_orders_orderID_fk": {
-          "name": "orderPositions_orderID_orders_orderID_fk",
-          "tableFrom": "orderPositions",
-          "tableTo": "orders",
-          "columnsFrom": [
-            "orderID"
-          ],
-          "columnsTo": [
-            "orderID"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        },
-        "orderPositions_productID_products_productID_fk": {
-          "name": "orderPositions_productID_products_productID_fk",
-          "tableFrom": "orderPositions",
-          "tableTo": "products",
-          "columnsFrom": [
-            "productID"
-          ],
-          "columnsTo": [
-            "productID"
+            "ordersID"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -238,8 +160,8 @@
     "orders": {
       "name": "orders",
       "columns": {
-        "orderID": {
-          "name": "orderID",
+        "ordersID": {
+          "name": "ordersID",
           "type": "integer",
           "primaryKey": true,
           "notNull": true,
@@ -252,16 +174,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "orderDate": {
-          "name": "orderDate",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "(current_timestamp)"
-        },
-        "totalPrice": {
-          "name": "totalPrice",
+        "cartID": {
+          "name": "cartID",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -274,24 +188,66 @@
           "notNull": true,
           "autoincrement": false
         },
-        "paymentStatus": {
-          "name": "paymentStatus",
-          "type": "text",
+        "totalPrice": {
+          "name": "totalPrice",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
+        },
+        "products": {
+          "name": "products",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "orderDate": {
+          "name": "orderDate",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": "(current_timestamp)"
         }
       },
       "indexes": {
-        "userIdIndex1": {
-          "name": "userIdIndex1",
+        "orderIdIndex2": {
+          "name": "orderIdIndex2",
+          "columns": [
+            "cartID"
+          ],
+          "isUnique": false
+        },
+        "userIdIndex4": {
+          "name": "userIdIndex4",
           "columns": [
             "userID"
+          ],
+          "isUnique": false
+        },
+        "addressIdIndex1": {
+          "name": "addressIdIndex1",
+          "columns": [
+            "shippingAddress"
           ],
           "isUnique": false
         }
       },
       "foreignKeys": {
+        "orders_cartID_shoppingCart_cartID_fk": {
+          "name": "orders_cartID_shoppingCart_cartID_fk",
+          "tableFrom": "orders",
+          "tableTo": "shoppingCart",
+          "columnsFrom": [
+            "cartID"
+          ],
+          "columnsTo": [
+            "cartID"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
         "orders_shippingAddress_shippingAddresses_addressID_fk": {
           "name": "orders_shippingAddress_shippingAddresses_addressID_fk",
           "tableFrom": "orders",

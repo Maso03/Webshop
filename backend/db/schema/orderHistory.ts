@@ -1,8 +1,7 @@
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
-import { users } from "./users"; // Importiere die Referenz-Tabelle für Benutzer
-import { orders } from "./orders"; // Importiere die Referenz-Tabelle für Bestellungen
-import { sql } from "drizzle-orm";
+import { or, sql } from "drizzle-orm";
 import { index } from "drizzle-orm/sqlite-core";
+import { orders } from "./orders";
 
 export const orderHistory = sqliteTable(
   "orderHistory",
@@ -10,7 +9,7 @@ export const orderHistory = sqliteTable(
     historyID: integer("historyID").primaryKey(),
     userID: text("userID").notNull(),
     orderID: integer("orderID")
-      .references(() => orders.orderID)
+      .references(() => orders.ordersID)
       .notNull(),
     status: text("status"),
     date: text("date")
@@ -19,8 +18,10 @@ export const orderHistory = sqliteTable(
   },
   (orderHistory) => {
     return {
-      userIdIndex4: index("userIdIndex4").on(orderHistory.userID),
-      orderIdIndex1: index("orderIdIndex1").on(orderHistory.orderID),
+      userIdIndex5: index("userIdIndex5").on(orderHistory.userID),
+      orderPosiitonIdIndex1: index("orderPositionIdIndex1").on(
+        orderHistory.orderID
+      ),
     };
   }
 );

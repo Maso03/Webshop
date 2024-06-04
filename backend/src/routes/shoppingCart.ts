@@ -1,12 +1,13 @@
 import { Hono, type Context, type Next } from "hono";
-import { getUser, kindeClient, sessionManager } from "../kinde";
+import { zValidator } from "@hono/zod-validator";
+import { z } from "zod";
+import { db } from "../../db";
 import { shoppingCart as shoppingCartTable } from "../../db/schema/shoppingCart";
 import { products as productTable } from "../../db/schema/products";
-import { eq } from "drizzle-orm";
 import { cartItems as cartItemsTable } from "../../db/schema/cartItems";
-import { db } from "../../db";
-import { z } from "zod";
-import { zValidator } from "@hono/zod-validator";
+import { eq } from "drizzle-orm";
+import { getUser, kindeClient, sessionManager } from "../kinde";
+import { shippingAddresses } from "../../db/schema/shippingAddresses";
 
 // Middleware zur Überprüfung der Benutzerauthentifizierung
 const checkIsAuthenticated = async (c: Context, next: Next) => {
@@ -37,18 +38,15 @@ const shoppingcart = z.object({
   cartID: z.number().int().positive(),
   productID: z.number().int().positive(),
   quantity: z.number().int().positive().min(1),
-  unitPrice: z.number().int().positive().min(1),
 });
 
 const createPostSchema = shoppingcart.omit({ cartItemID: true });
 
 export const shoppingCartRoute = new Hono()
-  // .use(checkIsAuthenticated)
-  // Hier können Sie Ihre Routen für den Warenkorb hinzufügen
-  // z.B. eine Route zum Hinzufügen von Produkten zum Warenkorb
   .post("/", zValidator("json", createPostSchema), async (c) => {
     const cartshopping = await c.req.valid("json");
 
+    // Erstellen Sie das Warenkorb-Element mit den Produktdaten
     const result = await db
       .insert(cartItemsTable)
       .values({
@@ -59,19 +57,20 @@ export const shoppingCartRoute = new Hono()
     c.status(201);
     return c.json({ result });
   })
-  //.use(checkIsAuthenticated)
+
   .get("/", getUser, async (c) => {
     const user = c.var.user;
 
     // Führen Sie eine Verknüpfung zwischen den Tabellen "cartItems", "products" und "shoppingCart" durch
-    // und wählen Sie die benötigten Daten aus
+    // und wählen Sie die benötigten Daten aus, einschließlich der zusätzlichen Produktdaten
     const carts = await db
       .select({
         cartID: shoppingCartTable.cartID,
         productID: cartItemsTable.productID,
         productName: productTable.productName,
+        productPrice: productTable.price, // Hinzufügen der price-Spalte
+        productDescription: productTable.description, // Hinzufügen der description-Spalte
         quantity: cartItemsTable.quantity,
-        unitPrice: cartItemsTable.unitPrice,
       })
       .from(shoppingCartTable)
       .innerJoin(
@@ -84,7 +83,8 @@ export const shoppingCartRoute = new Hono()
       )
       .where(eq(shoppingCartTable.userID, user.id));
 
-    // Formatieren Sie die Daten, um ein Array von Warenkörben zu erhalten
+    // Formatieren Sie die Daten, um ein Array von Warenkörben zu erhalten,
+    // das die zusätzlichen Produktdaten enthält
     const formattedCarts = [];
     for (const cart of carts) {
       const cartIndex = formattedCarts.findIndex(
@@ -97,8 +97,9 @@ export const shoppingCartRoute = new Hono()
             {
               productID: cart.productID,
               productName: cart.productName,
+              productPrice: cart.productPrice, // Hinzufügen der price-Eigenschaft
+              productDescription: cart.productDescription, // Hinzufügen der description-Eigenschaft
               quantity: cart.quantity,
-              unitPrice: cart.unitPrice,
             },
           ],
         });
@@ -106,21 +107,18 @@ export const shoppingCartRoute = new Hono()
         formattedCarts[cartIndex].items.push({
           productID: cart.productID,
           productName: cart.productName,
+          productPrice: cart.productPrice, // Hinzufügen der price-Eigenschaft
+          productDescription: cart.productDescription, // Hinzufügen der description-Eigenschaft
           quantity: cart.quantity,
-          unitPrice: cart.unitPrice,
         });
       }
     }
 
-    return c.json({
-      carts: formattedCarts,
-    });
+    return c.json({ carts: formattedCarts });
   })
-  .delete("/:cartItemId", async (c) => {
-    const user = c.var.user;
-    const cartItemId = Number.parseInt(c.req.param("cartItemId"));
 
-    // Entfernen Sie das Produkt aus dem Warenkorb
+  .delete("/:cartItemId", async (c) => {
+    const cartItemId = Number.parseInt(c.req.param("cartItemId"));
     const deletedItem = await db
       .delete(cartItemsTable)
       .where(eq(cartItemsTable.cartItemID, cartItemId))
@@ -136,16 +134,12 @@ export const shoppingCartRoute = new Hono()
     });
   })
   .put("/:cartItemId", zValidator("json", shoppingcart), async (c) => {
-    const user = c.var.user;
     const cartItemId = Number.parseInt(c.req.param("cartItemId"));
     const updatedCartItem = await c.req.valid("json");
 
-    // Aktualisieren Sie die Anzahl des Produkts im Warenkorb
     const updatedItem = await db
       .update(cartItemsTable)
-      .set({
-        quantity: updatedCartItem.quantity,
-      })
+      .set({ quantity: updatedCartItem.quantity })
       .where(eq(cartItemsTable.cartItemID, cartItemId))
       .returning();
 
@@ -154,7 +148,7 @@ export const shoppingCartRoute = new Hono()
     }
 
     return c.json({
-      message: "Anzahl des Produkts im Warenkorb erfolgreich aktualisiert",
+      message: "Anzahl der Produkte im Warenkorb erfolgreich aktualisiert",
       updatedItem,
     });
   });

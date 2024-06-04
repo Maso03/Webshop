@@ -5,27 +5,34 @@ import {
   numeric,
   index,
 } from "drizzle-orm/sqlite-core";
-import { users } from "./users"; // Importiere die Referenz-Tabelle für Benutzer
+import { products } from "./products"; // Import the reference table for products
+import { cartItems } from "./cartItems";
 import { sql } from "drizzle-orm";
-import { shippingAddresses } from "./shippingAddresses"; // Importiere die Referenz-Tabelle für Versandadressen
+import { shippingAddresses } from "./shippingAddresses";
+import { shoppingCart } from "./shoppingCart";
 
 export const orders = sqliteTable(
   "orders",
   {
-    orderID: integer("orderID").primaryKey(),
+    ordersID: integer("ordersID").primaryKey(),
     userID: text("userID").notNull(),
-    orderDate: text("orderDate")
+    cartID: integer("cartID")
       .notNull()
-      .default(sql`(current_timestamp)`), // timestamp als Text gespeichert
-    totalPrice: integer("totalPrice").notNull(),
+      .references(() => shoppingCart.cartID),
     addressID: integer("shippingAddress")
       .references(() => shippingAddresses.addressID)
       .notNull(),
-    paymentStatus: text("paymentStatus").notNull(),
+    totalPrice: integer("totalPrice").notNull(),
+    products: text("products"),
+    orderDate: text("orderDate")
+      .notNull()
+      .default(sql`(current_timestamp)`), // timestamp als Text gespeichert
   },
   (orders) => {
     return {
-      userIdIndex1: index("userIdIndex1").on(orders.userID),
+      orderIdIndex2: index("orderIdIndex2").on(orders.cartID),
+      userIdIndex4: index("userIdIndex4").on(orders.userID),
+      addressIdIndex1: index("addressIdIndex1").on(orders.addressID),
     };
   }
 );

@@ -7,10 +7,8 @@ import { adminRoute } from "./routes/admin";
 import { productCategoriesRoute } from "./routes/productCategories";
 import { shoppingCartRoute } from "./routes/shoppingCart";
 import { createShoppingCartRoute } from "./routes/createShoppingCart";
-import { ordersRoute } from "./routes/order";
 import { shippingAddressRoute } from "./routes/shippingAddress";
-import { orderHistoryRoute } from "./routes/orderHistory";
-import { orderPositionsRoute } from "./routes/orderPositions";
+import { orderRoute } from "./routes/orders";
 
 const app = new Hono();
 
@@ -24,13 +22,11 @@ const apiRoutes = app
   .route("/products", productsRoute)
   .route("/", authRoute)
   .route("/admin", adminRoute)
-  .route("/productCatogory", productCategoriesRoute)
+  .route("/productCategory", productCategoriesRoute)
   .route("/shoppingCart", shoppingCartRoute)
   .route("/createShoppingCart", createShoppingCartRoute)
-  .route("/orders", ordersRoute)
   .route("/createShippingAddress", shippingAddressRoute)
-  .route("/orderHistory", orderHistoryRoute)
-  .route("/orderPositions", orderPositionsRoute);
+  .route("/orders", orderRoute);
 
 app.use("*", serveStatic({ root: ".frontend/dist" }));
 app.get("*", serveStatic({ path: "./frontend/dist/index.html" }));
