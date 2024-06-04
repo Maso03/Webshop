@@ -14,7 +14,7 @@ const Footer: React.FC = () => {
             rel="noopener noreferrer"
             className="text-gray-700 hover:text-gray-900"
           >
-            <img src="/public/insta.png" alt="Instagram" className="w-6 h-6" />
+            <img src="/insta.png" alt="Instagram" className="w-6 h-6" />
           </a>
           <a
             href="https://twitter.com"
@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
             rel="noopener noreferrer"
             className="text-gray-700 hover:text-gray-900"
           >
-            <img src="/public/X_icon.svg" alt="  X" className="w-6 h-6" />
+            <img src="/X_icon.svg" alt="  X" className="w-6 h-6" />
           </a>
           <a
             href="https://facebook.com"
@@ -30,11 +30,7 @@ const Footer: React.FC = () => {
             rel="noopener noreferrer"
             className="text-gray-700 hover:text-gray-900"
           >
-            <img
-              src="/public/facebook.png"
-              alt="Facebook"
-              className="w-6 h-6"
-            />
+            <img src="/facebook.png" alt="Facebook" className="w-6 h-6" />
           </a>
         </div>
       </div>
