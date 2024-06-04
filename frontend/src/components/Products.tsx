@@ -46,7 +46,7 @@ const Products: React.FC = () => {
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center">
       <NavBar />
-      <main className="container mx-auto flex-1 flex flex-col items-center justify-center text-center px-4">
+      <main className="container mx-auto flex-1 flex flex-col items-center justify-center px-4 py-8 mt-16">
         <h2 className="text-4xl font-bold mb-4">Our Products</h2>
         <p className="text-gray-700 mb-8">
           Here are some of our amazing products.

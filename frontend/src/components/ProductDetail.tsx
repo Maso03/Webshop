@@ -46,13 +46,21 @@ const ProductDetail: React.FC = () => {
   console.log(product);
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center">
+    <div className="bg-gray-100 min-h-screen flex flex-col">
       <NavBar />
-      <main className="container mx-auto flex-1 flex flex-col items-center justify-center px-4 py-8">
+      <main className="container mx-auto flex-1 flex flex-col items-center justify-center px-4 py-8 mt-16">
         {loading ? (
           <p>Loading...</p>
         ) : product ? (
-          <div className="bg-white p-8 rounded shadow-lg max-w-2xl w-full text-center">
+          <div className="relative bg-white p-8 rounded shadow-lg max-w-2xl w-full text-center">
+            <a
+              href="/products"
+              className="absolute top-4 left-4 text-gray-500 hover:text-gray-700"
+              aria-label="Back to products"
+              style={{ fontSize: "2rem" }}
+            >
+              &#8592; {/* Unicode for left arrow */}
+            </a>
             <h2 className="text-4xl font-bold mb-4">{product.productName}</h2>
             <p className="text-gray-600 mb-4">{product.description}</p>
             <p className="text-green-500 font-bold text-2xl mb-4">
