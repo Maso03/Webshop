@@ -43,6 +43,7 @@ const ProductDetail: React.FC = () => {
   }, [id]);
 
   const handleAddToCart = () => {};
+  console.log(product);
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center">
