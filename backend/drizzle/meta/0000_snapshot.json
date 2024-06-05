@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "d9a53d27-7785-4922-9425-115d55f8e5f3",
+  "id": "64062a0b-e899-41c7-8a4f-00774513a0d2",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "cartItems": {
@@ -75,80 +75,6 @@
           ],
           "columnsTo": [
             "productID"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "orderHistory": {
-      "name": "orderHistory",
-      "columns": {
-        "historyID": {
-          "name": "historyID",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "userID": {
-          "name": "userID",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "orderID": {
-          "name": "orderID",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "status": {
-          "name": "status",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "date": {
-          "name": "date",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "(current_timestamp)"
-        }
-      },
-      "indexes": {
-        "userIdIndex5": {
-          "name": "userIdIndex5",
-          "columns": [
-            "userID"
-          ],
-          "isUnique": false
-        },
-        "orderPositionIdIndex1": {
-          "name": "orderPositionIdIndex1",
-          "columns": [
-            "orderID"
-          ],
-          "isUnique": false
-        }
-      },
-      "foreignKeys": {
-        "orderHistory_orderID_orders_ordersID_fk": {
-          "name": "orderHistory_orderID_orders_ordersID_fk",
-          "tableFrom": "orderHistory",
-          "tableTo": "orders",
-          "columnsFrom": [
-            "orderID"
-          ],
-          "columnsTo": [
-            "ordersID"
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
@@ -532,5 +458,8 @@
     "schemas": {},
     "tables": {},
     "columns": {}
+  },
+  "internal": {
+    "indexes": {}
   }
 }

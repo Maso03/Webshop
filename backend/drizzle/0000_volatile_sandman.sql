@@ -7,15 +7,6 @@ CREATE TABLE `cartItems` (
 	FOREIGN KEY (`productID`) REFERENCES `products`(`productID`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE TABLE `orderHistory` (
-	`historyID` integer PRIMARY KEY NOT NULL,
-	`userID` text NOT NULL,
-	`orderID` integer NOT NULL,
-	`status` text,
-	`date` text DEFAULT (current_timestamp) NOT NULL,
-	FOREIGN KEY (`orderID`) REFERENCES `orders`(`ordersID`) ON UPDATE no action ON DELETE no action
-);
---> statement-breakpoint
 CREATE TABLE `orders` (
 	`ordersID` integer PRIMARY KEY NOT NULL,
 	`userID` text NOT NULL,
@@ -69,8 +60,6 @@ CREATE TABLE `users` (
 --> statement-breakpoint
 CREATE INDEX `cartIdIndex1` ON `cartItems` (`cartID`);--> statement-breakpoint
 CREATE INDEX `productIdIndex1` ON `cartItems` (`productID`);--> statement-breakpoint
-CREATE INDEX `userIdIndex5` ON `orderHistory` (`userID`);--> statement-breakpoint
-CREATE INDEX `orderPositionIdIndex1` ON `orderHistory` (`orderID`);--> statement-breakpoint
 CREATE INDEX `orderIdIndex2` ON `orders` (`cartID`);--> statement-breakpoint
 CREATE INDEX `userIdIndex4` ON `orders` (`userID`);--> statement-breakpoint
 CREATE INDEX `addressIdIndex1` ON `orders` (`shippingAddress`);--> statement-breakpoint
