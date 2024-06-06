@@ -42,6 +42,7 @@ adminRoute
     try {
       const accessToken = process.env.access_token;
 
+      console.log("Access Token:", accessToken);
       const headers = {
         Accept: "application/json",
         Authorization: `Bearer ${accessToken}`,
