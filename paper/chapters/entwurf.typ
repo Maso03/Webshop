@@ -76,3 +76,44 @@ Deshalb wurde Hono als Web-Framework für die Entwicklung des Webshops gewählt,
   [Hono], 	[Node], 	[42,699.317], 	[60,797.19], 	[56,645.8], 	[10,654.96],
   [Express], [node], [16,461.68], [17,656.74], [16,615.32], [15,112.98],
 ) Die Ergebnisse sind in req/s gemessen<cluster-single-node>
+
+== TypeScript
+
+TypeScript ist eine von Microsoft entwickelte Programmiersprache, die eine strikte Typisierung für JavaScript bietet. Sie erweitert JavaScript um statische Typisierung, Klassen, Interfaces und Module, was die Entwicklung von großen und komplexen Anwendungen erleichtert. TypeScript wird zu JavaScript kompiliert und kann in jedem Browser und auf jedem Betriebssystem ausgeführt werden. Diese Eigenschaften tragen zur Steigerung der Produktivität von Entwicklern und zur Verbesserung der Codequalität bei.
+TypeScript erweitert JavaScript um zusätzliche Features wie Interfaces, Enums, Generics und Module. 
+
+=== Vorteile von TypeScript
+
+  1. Statische Typisierung
+    TypeScript bietet eine statische Typisierung, die es Entwicklern ermöglicht, Typfehler bereits zur Entwicklungszeit zu erkennen und zu beheben. Dies führt zu weniger Fehlern und einer höheren Codequalität.
+
+  2. Moderne JavaScript-Features
+    TypeScript unterstützt moderne JavaScript-Features wie Klassen, Interfaces, Generics und Module, die die Entwicklung von großen und komplexen Anwendungen erleichtern. Darüber hinaus unterstützt TypeScript asynchrone Programmierung, was die Handhabung asynchroner Operationen vereinfacht.
+
+Aufgrund dieser Vorteile wurde TypeScript als primäre Programmiersprache für die Entwicklung des Webshops gewählt. 
+
+== Zod
+
+Zod ist eine TypeScript-First-Schema-Validierungs-Bibliothek, die es Entwicklern ermöglicht, Datenstrukturen zu definieren und zu validieren. Zod bietet eine einfache und deklarative API zum Definieren von Schemas und zur Validierung von Daten. Zod ist speziell für TypeScript entwickelt und bietet eine nahtlose Integration mit der Sprache. Zod unterstützt eine Vielzahl von Datentypen, Validierungsregeln und Transformationen, die es Entwicklern ermöglichen, komplexe Datenstrukturen zu definieren und zu validieren.
+
+=== Vorteile von Zod
+
+  1. Typsicherheit
+    Zod bietet Typsicherheit auf der Ebene der Datenvalidierung, was es Entwicklern ermöglicht, Datenstrukturen zu definieren und zu validieren, ohne zusätzlichen Code schreiben zu müssen. Dies führt zu weniger Fehlern und einer höheren Codequalität.
+
+  2. Einfache API
+    Zod bietet eine einfache und deklarative API zum Definieren von Schemas und zur Validierung von Daten. Die API ist intuitiv und leicht verständlich, was die Entwicklung von Datenvalidierungslogik vereinfacht.
+
+  3. Integration mit Frameworks
+    Zod bietet eine nahtlose Integration mit verschiedenen Frameworks und Bibliotheken, was es zu einer vielseitigen Lösung für die Datenvalidierung macht. Besonderns in Kombination mit Backend-Frameworks wie Hono ist Zod eine gute Wahl für die Datenvalidierung.
+
+  4. Leistungsfähigkeit
+    Zod zeichnet sich durch hohe Leistung und geringen Overhead aus, was die Validierung großer Datenmengen effizient macht, ohne die Anwendungsleistung zu beeinträchtigen.
+
+  
+=== Anwendung im Webshop
+Zod wird im Webshop für die Validierung von Benutzereingaben, API-Anfragen und Datenbankantworten verwendet. Durch die Verwendung von Zod wird sichergestellt, dass die Datenintegrität gewährleistet ist und sichergestellt wird, dass die vom Benutzer übermittelten Daten den erwarteten Formaten und Typen entsprechen, bevor diese in die Datenbank gespeichert werden. Zudem erleichert Zod die Fehlerbehandlung und die Rückmeldung an den Benutzer im Falle von Validierungsfehlern, anhand von detaillierten Fehlermeldungen.
+
+
+== Kinde Auth 
+Kinde Auth ist eine Authentifizierung- und Benutzerverwaltungslösung, die speziell für SaaS-Anwendungen entwickelt wurde. Es bietet eine Vielzahl von Funktionen, die es Entwicklern ermöglichen, Benutzerkonten zu verwalten, Authentifizierung zu implementieren und Zugriffsrechte zu steuern. Dabei wird drauf geachtet, dass höchste Sicherheitsstandards eingehalten werden, um die Benutzerdaten zu schützen. Die Integration von Kinde Auth im Webshop ermöglicht es, Benutzerkonten zu erstellen, sich anzumelden und Zugriffsrechte zu verwalten. Dadurch wird eine robuste und flexible Authentifizierunginfrastruktur bereitgestellt, die den Anforderungen des Webshops entspricht, da im Webshop mit besonders sensiblen Daten gearbeitet wird.

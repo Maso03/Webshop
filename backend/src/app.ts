@@ -9,6 +9,7 @@ import { shoppingCartRoute } from "./routes/shoppingCart";
 import { createShoppingCartRoute } from "./routes/createShoppingCart";
 import { shippingAddressRoute } from "./routes/shippingAddress";
 import { orderRoute } from "./routes/orders";
+import { PaypalAccess } from "./paypal";
 
 const app = new Hono();
 
@@ -26,7 +27,8 @@ const apiRoutes = app
   .route("/shoppingCart", shoppingCartRoute)
   .route("/createShoppingCart", createShoppingCartRoute)
   .route("/createShippingAddress", shippingAddressRoute)
-  .route("/orders", orderRoute);
+  .route("/orders", orderRoute)
+  .route("/", PaypalAccess);
 
 app.use("*", serveStatic({ root: ".frontend/dist" }));
 app.get("*", serveStatic({ path: "./frontend/dist/index.html" }));
