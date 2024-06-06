@@ -42,8 +42,64 @@ const ProductDetail: React.FC = () => {
     fetchProduct();
   }, [id]);
 
-  const handleAddToCart = () => {};
-  console.log(product);
+  const handleAddToCart = async () => {
+    if (!product) return;
+
+    /*
+    const cart = {
+      cartID: 1,
+      userID: "1010",
+    };
+
+    
+    try {
+      const response = await fetch(
+        "http://localhost:5173/api/createShoppingCart",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(cart),
+        }
+      );
+      console.log(cart);
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+      
+
+      const data = await response.json();
+      console.log(data.result);
+    } catch (error) {
+      console.error("Error adding shopping cart:", error);
+    }
+    */
+    const cartItem = {
+      productID: product.productID,
+      cartID: 3,
+      quantity: 12,
+    };
+
+    try {
+      const response = await fetch("http://localhost:5173/api/shoppingCart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cartItem),
+      });
+      console.log(JSON.stringify(cartItem));
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`);
+      }
+
+      const data = await response.json();
+      console.log(data.result);
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+    }
+  };
 
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col">

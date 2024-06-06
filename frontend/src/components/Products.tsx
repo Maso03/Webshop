@@ -25,7 +25,6 @@ const Products: React.FC = () => {
         const response = await fetch("/api/products");
         const data = await response.json();
         let filteredProducts = data.products;
-        console.log(searchTerm);
         if (searchTerm) {
           filteredProducts = data.products.filter((product: Product) =>
             product.productName.toLowerCase().includes(searchTerm.toLowerCase())
