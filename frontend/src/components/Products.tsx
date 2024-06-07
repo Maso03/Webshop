@@ -31,7 +31,6 @@ const Products: React.FC = () => {
           );
         }
         setProducts(filteredProducts);
-        console.log(filteredProducts); // Log filtered products to the console
       } catch (error) {
         console.error("Error fetching products:", error);
       } finally {

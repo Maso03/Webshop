@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import User from "./User";
 
 interface Product {
   productID: number;
@@ -44,42 +45,18 @@ const ProductDetail: React.FC = () => {
 
   const handleAddToCart = async () => {
     if (!product) return;
-
     /*
-    const cart = {
-      cartID: 1,
-      userID: "1010",
-    };
-
-    
-    try {
-      const response = await fetch(
-        "http://localhost:5173/api/createShoppingCart",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(cart),
-        }
-      );
-      console.log(cart);
-      if (!response.ok) {
-        throw new Error(`Error: ${response.statusText}`);
-      }
-      
-
-      const data = await response.json();
-      console.log(data.result);
-    } catch (error) {
-      console.error("Error adding shopping cart:", error);
-    }
+    TODO: 
+    - Bei Login ein Cart für den User erstellen und ID speichern
+    - Bei Checkout (Mock Checkout) ein neues Cart erstellen und als aktuelles Cart setzen
     */
     const cartItem = {
       productID: product.productID,
-      cartID: 3,
-      quantity: 12,
+      cartID: Number(localStorage.getItem("cartId")),
+      quantity: 1,
     };
+
+    console.log(cartItem);
 
     try {
       const response = await fetch("http://localhost:5173/api/shoppingCart", {

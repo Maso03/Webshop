@@ -25,7 +25,6 @@ const NavBar: React.FC = () => {
         console.error("Failed to fetch user", error);
       }
     };
-    console.log(user);
     fetchUser();
   }, []);
 
@@ -56,12 +55,22 @@ const NavBar: React.FC = () => {
             onKeyPress={handleKeyPress}
           />
           <div className="flex items-center">
-            <a href="/api/login" className="mr-4 ml-4">
-              Login
-            </a>
-            <a href="/api/logout" className="mr-4">
-              Logout
-            </a>
+            {!user && (
+              <a
+                href="/api/login"
+                className="mr-4 ml-4 text-gray-500 border border-gray-500 rounded-full px-4 py-2"
+              >
+                Login
+              </a>
+            )}
+            {user && (
+              <a
+                href="/api/logout"
+                className="mr-4 ml-4 text-gray-500 border border-gray-500 rounded-full px-4 py-2"
+              >
+                Logout
+              </a>
+            )}
             <Link to="/cart" className="mr-4">
               <img src="/cart.svg" alt="Cart" className="w-10 h-10" />
             </Link>

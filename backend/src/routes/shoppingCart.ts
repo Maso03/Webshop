@@ -121,10 +121,9 @@ export const shoppingCartRoute = new Hono()
     const cartItemId = Number.parseInt(c.req.param("cartItemId"));
     const deletedItem = await db
       .delete(cartItemsTable)
-      .where(eq(cartItemsTable.cartItemID, cartItemId))
+      .where(eq(cartItemsTable.productID, cartItemId))
       .returning();
-
-    if (!deletedItem) {
+    if (!deletedItem || deletedItem.length === 0) {
       return c.notFound();
     }
 
