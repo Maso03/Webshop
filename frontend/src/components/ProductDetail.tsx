@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
-import User from "./User";
 
 interface Product {
   productID: number;
