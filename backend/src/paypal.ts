@@ -36,11 +36,11 @@ async function generateAccessToken(): Promise<string> {
 }
 
 // Call the function and set the response on the context object
-export const PaypalAccess = new Hono().post("/paypal", async (c) => {
+export const PaypalAccess = new Hono().post("/paypal", getUser, async (c) => {
   try {
     const token = await generateAccessToken();
 
-    // const user = c.var.user;
+    const user = c.var.user;
 
     const carts = await db
       .select({
@@ -60,9 +60,7 @@ export const PaypalAccess = new Hono().post("/paypal", async (c) => {
         productTable,
         eq(cartItemsTable.productID, productTable.productID)
       )
-      .where(
-        eq(shoppingCartTable.userID, "kp_b81602de6f944f228f161c2e889792e8")
-      ); //user.id
+      .where(eq(shoppingCartTable.userID, user.id)); //user.id
 
     if (carts.length === 0) {
       return c.json({ error: "Shopping cart is empty" }, 400);
