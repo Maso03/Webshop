@@ -11,6 +11,7 @@ import Contact from "./components/Contact";
 import ProductDetail from "./components/ProductDetail";
 import AdminProducts from "./components/AdminPage";
 import ShoppingCartPage from "./components/Cart";
+import CheckoutPage from "./components/Checkout";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -24,6 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="/cart" element={<ShoppingCartPage />} />
+        <Route path="/checkout" element={<CheckoutPage />} />
       </Routes>
     </Router>
   </React.StrictMode>

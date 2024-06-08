@@ -1,5 +1,6 @@
 // CartPage.tsx
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
@@ -17,6 +18,7 @@ type CartItem = {
 
 const CartPage: React.FC = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -72,8 +74,7 @@ const CartPage: React.FC = () => {
   };
 
   const handleCheckout = () => {
-    // Handle checkout logic here
-    console.log("Checkout clicked!");
+    navigate("/checkout");
   };
 
   return (
