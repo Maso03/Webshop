@@ -1,5 +1,6 @@
 // CheckoutPage.tsx
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
@@ -17,11 +18,12 @@ type CartItem = {
 
 const CheckoutPage: React.FC = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
+  const navigate = useNavigate();
 
   const [address, setAddress] = useState({
     name: "",
     email: "",
-    street: "",
+    address: "",
     city: "",
     postalCode: "",
     country: "",
@@ -64,13 +66,63 @@ const CheckoutPage: React.FC = () => {
     return Object.values(address).every((field) => field.trim() !== "");
   };
 
-  const handlePayWithPayPal = () => {
+  const handlePayWithPayPal = async () => {
     if (validateForm()) {
-      alert("PAYED!!!");
+      try {
+        // Step 1: Create Shipping Address
+        const shippingAddressResponse = await fetch(
+          "/api/createShippingAddress",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userID: localStorage.getItem("userID"),
+              address: address.address,
+              city: address.city,
+              postalCode: address.postalCode,
+              country: address.country,
+            }),
+          }
+        );
+
+        if (!shippingAddressResponse.ok) {
+          throw new Error(
+            `Error creating shipping address: ${shippingAddressResponse.statusText}`
+          );
+        }
+        const result = await shippingAddressResponse.json();
+        const shippingAddressID = result.result[0].addressID;
+
+        console.log(shippingAddressID);
+
+        // Step 2: Checkout with Shipping Address ID
+        const checkoutResponse = await fetch("/api/orders/checkout", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            addressID: shippingAddressID,
+            cartID: cart[0].cartID, // Assuming only one cart item for simplicity
+          }),
+        });
+
+        if (!checkoutResponse.ok) {
+          throw new Error(
+            `Error processing order: ${checkoutResponse.statusText}`
+          );
+        }
+
+        alert("Order processed successfully");
+        navigate("/");
+      } catch (error) {
+        console.error("Error processing order:", error);
+        alert("Oopsie Woopsie! Something went wrong. Please try again.");
+      }
     } else {
-      alert(
-        "Please fill out all fields, otherwise the product will be shipped to the void."
-      );
+      alert("Oopsie Woopsie! Please fill out all fields.");
     }
   };
 
@@ -132,8 +184,8 @@ const CheckoutPage: React.FC = () => {
                 <label className="block mb-2 font-medium">Street Address</label>
                 <input
                   type="text"
-                  name="street"
-                  value={address.street}
+                  name="address"
+                  value={address.address}
                   onChange={handleChange}
                   className="w-full p-2 border rounded"
                 />
