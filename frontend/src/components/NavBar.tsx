@@ -48,7 +48,7 @@ const NavBar: React.FC = () => {
         <div className="flex items-center">
           <input
             type="text"
-            placeholder="Suchen..."
+            placeholder="Search..."
             className="border rounded p-2 mr-4"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -74,6 +74,11 @@ const NavBar: React.FC = () => {
             <Link to="/cart" className="mr-4">
               <img src="/cart.svg" alt="Cart" className="w-10 h-10" />
             </Link>
+            {user && (
+              <Link to="/user" className="mr-4">
+                <img src="/user.svg" alt="User Page" className="w-10 h-10" />
+              </Link>
+            )}
             {user && <span className="ml-2">Hello, {user.name}!</span>}
           </div>
         </div>

@@ -1,41 +1,57 @@
 // src/components/LandingPage.tsx
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
 const LandingPage: React.FC = () => {
+  const [isUserLoaded, setIsUserLoaded] = useState(false);
+  const [isCartsLoaded, setIsCartsLoaded] = useState(false);
+
   useEffect(() => {
     const getUser = async () => {
       const response = await fetch("/api/me");
 
       if (response.status === 401) {
         localStorage.setItem("userID", "0");
+        setIsUserLoaded(true);
         return;
       }
 
       const data = await response.json();
-      console.log(data);
+      console.log("User gotten");
       const user = data.user;
       localStorage.setItem("userID", user.id);
+      setIsUserLoaded(true);
     };
+
     getUser();
-  });
+  }, []);
+
   useEffect(() => {
     const getCurrentCarts = async () => {
+      if (!isUserLoaded) return;
+
       const response = await fetch("api/shoppingCart");
       if (response.status === 401) {
         localStorage.setItem("cartId", "0");
       }
       const data = await response.json();
       const carts = data.carts;
-      console.log("Current shopping cart: ", carts[0].cartID);
-      localStorage.setItem("cartId", carts[0].cartID);
+      console.log("Current carts checked");
+      const cartId = carts[0] ? carts[0].cartID : 0;
+      console.log("Current shopping cart: ", cartId);
+      localStorage.setItem("cartId", cartId.toString());
+      setIsCartsLoaded(true);
     };
+
     getCurrentCarts();
-  });
+  }, [isUserLoaded]);
+
   useEffect(() => {
     const initializeCart = async () => {
+      if (!isCartsLoaded) return;
+
       const cartId = localStorage.getItem("cartId");
       console.log(localStorage);
       if (!cartId || cartId === "0") {
@@ -53,14 +69,15 @@ const LandingPage: React.FC = () => {
           });
           if (response.ok) {
             const result = await response.json();
-            localStorage.setItem("cartId", result.result[0].cartID);
+            console.log("New Shopping cart created", result.result[0].cartID);
+            localStorage.setItem("cartId", result.result[0].cartID.toString());
           }
         }
       }
     };
-    initializeCart();
-  });
 
+    initializeCart();
+  }, [isCartsLoaded]);
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
       <NavBar />
