@@ -120,7 +120,7 @@ const LandingPage: React.FC = () => {
           </h3>
           <p className="text-gray-700">Availability: {product.availability}</p>
           {product.availability <= 5 && (
-            <p className="text-red-700 font-bold">Soon Out of Stock</p>
+            <p className="text-red-700 font-bold">Almost Out of Stock!</p>
           )}
         </div>
       </Link>
@@ -135,7 +135,7 @@ const LandingPage: React.FC = () => {
           <h3 className="text-xl font-bold text-gray-800">
             {product.productName}
           </h3>
-          <p className="text-green-700">Today for {product.price}€!</p>
+          <p className="text-green-700">BUY NOW: Only {product.price}€!</p>
         </div>
       </Link>
     ));
