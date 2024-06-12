@@ -41,11 +41,41 @@ const Products: React.FC = () => {
     fetchProducts();
   }, [searchTerm]);
 
+  const sortByAlphabet = () => {
+    const sortedProducts = [...products].sort((a, b) =>
+      a.productName.localeCompare(b.productName)
+    );
+    setProducts(sortedProducts);
+  };
+
+  const sortByPrice = () => {
+    const sortedProducts = [...products].sort(
+      (a, b) => parseFloat(a.price) - parseFloat(b.price)
+    );
+    setProducts(sortedProducts);
+  };
+
   return (
     <div className="bg-gray-200 min-h-screen flex flex-col items-center">
       <NavBar />
       <main className="container mx-auto flex-1 flex flex-col items-center justify-center px-4 py-8 mt-16">
-        <h2 className="text-4xl font-bold mb-4 text-gray-800">Our Products</h2>
+        <div className="flex items-center justify-between w-full mb-4">
+          <h2 className="text-4xl font-bold text-gray-800">Our Products</h2>
+          <div className="flex space-x-4">
+            <button
+              onClick={sortByAlphabet}
+              className="text-blue-500 hover:underline"
+            >
+              Sort by Alphabet
+            </button>
+            <button
+              onClick={sortByPrice}
+              className="text-blue-500 hover:underline"
+            >
+              Sort by Price
+            </button>
+          </div>
+        </div>
         <p className="text-gray-600 mb-8">
           Here are some of our amazing products.
         </p>
