@@ -335,7 +335,7 @@ Zusätzlich zu einem Namen und einer Tagline muss auch ein einprägsames Logo er
     image("/paper/assets/trendvault_3.png"),
     image("/paper/assets/trendvault_4.png")
   )).join(),
-  caption: [Die vier finalen Logo-Designs mit unterschiedlichen Farbpaletten]
+  caption: [Die vier finalen Logo-Designs mit unterschiedlichen Farbpaletten, Quelle: Eigene Darstellung]
 )
 
 Gleichzeitig wurde mit der Auswahl eines Logos auch die Farbpalette des Webshops ausgewählt. Die finale Entscheidung viel hier auf das Logo unten rechts. Der Lieferwagen in Kombination mit dem kompletten Haus, in angenehm blauen farben Farben ergibt zusammen mit dem orangenen Kontrast ein ideales junges, modernes und unternehmerisches Bild eines Webshops, welcher trendige Produkte an junge Erwachsene verkauft. Das Farbschema soll also aus folgenden Farben bestehen:
@@ -369,7 +369,7 @@ Es werden Prototypen für mehrere Seiten erstellt, um das Design und die Struktu
 === Startseite und Navigationsleiste
 #figure(
   image("/paper/assets/prototype_landing_page.PNG", width: 80%),
-  caption: [Der Prototyp der Startseite]
+  caption: [Der Prototyp der Startseite, Quelle: Eigene Darstellung]
 )
 
 Die Startseite, momentan noch ohne Funktionalität, zeigt wie die Navigationsleiste und die Fußleiste zum Corporate Design passen. Es werden gedämpfte blau-grau Töne für die Farbgestaltung der beiden Leisten verwendet. Der Link zur Startseite wird durch ein Bild des Logos ohne Hintergrund und Schrift realisiert, während der Einkaufswagen durch ein SVG-Icon eines Einkaufwagens dargestellt wird. Andere Links wie z.B. der Produktbrowser oder eine Kontaktseite mit wichtigen Informationen, sowie der Adminbereich können über Textmenüs aufgerufen werden. Die Fußzeile enthält Kontaktinformationen, den Namen des Unternehmens, sowie Links zu fiktiven Social-Media Seiten des Unternehmens. Als Beispiele wurden hier die Plattformen Instagram, X (ehemals Twitter), und Facebook genommen, deren Logos in Schwarz-Weißen Versionen als Links fungieren um den unteren Bildschirmrand nicht mit Text zu überladen. 
@@ -378,13 +378,221 @@ Sobald sich der Nutzer einloggt soll sich das Aussehen der Navigationsleiste lei
 
 #figure(
   image("/paper/assets/logged_in.PNG"),
-  caption: [Rechter Teil der Navigationsleiste nach dem Einloggen]
+  caption: [Rechter Teil der Navigationsleiste nach dem Einloggen, Quelle: Eigene Darstellung]
 )
-Ein eingeloggter Nutzer wird neben der Suchleiste nun einen Einkaufswagen und ein Nutzer-Icon sehen. Diese führen jeweils in den Einkaufswagen des Nutzers bzw. zu seinem Nutzerprofil. Der Login-Button wird hier durch einen Logout-Button ausgetauscht.
+Ein eingeloggter Nutzer wird neben der Suchleiste nun einen Einkaufswagen und ein Nutzer-Icon sehen. Diese führen jeweils in den Einkaufswagen des Nutzers bzw. zu seinem Nutzerprofil. Der Login-Button wird hier durch einen Logout-Button ausgetauscht. Zusätzlich wird der eingeloggte Benutzer hier mit seinem Namen begrüßt, der beim Erstellen des Accounts angegeben wurde.
 
 === Produkt-Browser
 #figure(
   image("/paper/assets/prototype_products.PNG"),
-  caption: [Prototyp des Produkte-Browsers]
+  caption: [Prototyp des Produkte-Browsers, Quelle: Eigene Darstellung]
 )
 Der Produkte Browser (hier gefüllt mit Testprodukten) zeigt alle Produkte in Viererreihen. Der Name des Produkts ist fett gedruckt, mit einer Beschreibung darunter. Der Preis sticht durch eine grüne Färbung hervor. Die Verfügbarkeit wird in geringerer Deckkraft daruntergeschrieben. Eine Option zum sortieren nach dem Alphabet und nach Preis befindet sich in der oberen rechten Ecke. Durch einen Klick auf ein Produkt wird man auf die gegebene Produktseite weitergeleitet. 
+#pagebreak()
+=== Produkt-Details
+#figure(
+  image("/paper/assets/prototype_product_page.PNG", width: 80%),
+  caption: [Prototyp der Produkt-Details Seite, Quelle: Eigene Darstellung]
+)
+Die Produkt-Details werden simpel mitten auf der Seite angezeigt. Es wird ein Bild gerendert, der Name steht in größeren fett gedruckten Buchstaben im Blickmittelpunkt, und die Details werden in Schrift mit weniger Deckkraft darunter aufgelistet. Der Preis wird durch die grüne Färbung für den Nutzer hervorgehoben. Der "Add to cart"-Button ist ebenfalls grün hervorgehoben. Sobald der "Add to cart"-Button geklickt wird, soll ein Popup-Fenster erscheinen, dass den Nutzer nach der gewünschten Anzahl abfragt. Durch diesen Prototyp werden dem Nutzer die wichtigen Informationen direkt übermittelt, und er kann das Produkt direkt in beliebiger Anzahl (solange vorhanden) in den Einkaufswagen legen. 
+#pagebreak()
+
+=== Warenkorb
+#figure(
+  image("/paper/assets/prototype_cart.PNG", width: 80%),
+  caption: [Prototyp des Warenkorbs Seite, Quelle: Eigene Darstellung]
+)
+Der Warenkorb (Hier so zugeschnitten, das Navigationsleiste und Fußleiste nicht im Bild sind) listet alle ausgewählten Produkte auf, und gibt dem Nutzer die Möglichkeit, über das rote "X" das Produkt aus dem Warenkorb zu entfernen. Der Gesamtpreis des Einkaufes wird ebenfalls angezeigt. Zusätzlich wird dem Nutzer die einzigartige Cart-ID angezeigt. Diese kann der Nutzer im Falle eines Fehlers oder Problems den Entwicklern mitteilen, damit diese möglichst effizient behoben werden können. Der grüne Checkout-Button leitet den Nutzer mit dem momentanen Einkaufswagen weiter zum Checkout-Bildschirm. 
+
+#pagebreak()
+
+=== Checkout
+#figure(
+  image("/paper/assets/prototype_checkout.PNG", width: 70%),
+  caption: [Prototyp der Checkout Seite, Quelle: Eigene Darstellung]
+)
+
+Die Checkout-Seite gibt dem Nutzer auf der rechten Seite die Möglichkeit, seine Addressinformationen einzutragen. Auf der linken Seite wird erneut der komplette Einkauf aufgelistet, und der Gesamtpreis angezeigt. Zahlen kann der Nutzer mit dem Button "Pay with PayPal", welcher später mit der PayPal-API verknüpft werden soll. Zusätzlich soll der Bezahlvorgang erst gestartet werden können, wenn der Nutzer alle Informationen auf der rechten Seite ausgefüllt hat. Ansonsten soll ihn ein Pop-Up daran erinnern. 
+
+== Fazit zum Design
+Die Auswahl des Designs lief erfolgreich. Es wurde ein Routing-Konzept für den Webshop geschaffen und für jede Route bzw. Seite ein geeigneter Wireframe entworfen. Im Anschluss konnten aus diesen Wireframes nach praktischer Überdenkung statische Prototypen entwickelt werden, die nun in den nächsten Schritten durch Entwicklung des Frontends dynamisch mit Verbindungen zum Backend-Server zu einem voll funktionsfähigem Webshop ausgearbeitet werden können. 
+
+= Integration des Frontend zum Backend-Server
+Im folgenden Kapitel wird dokumentiert, wie aus dem Frontend die unterschiedlichen APIs aus dem Backend angesprochen werden. Dazu gehört der korrekte Aufbau der Requests sowie die Verarbeitung der Daten. 
+
+== Produkte
+=== Laden aller Produkte
+Für die Produkte wird folgende API verwendet
+#figure(
+  ```
+  GET /api/products
+  ```
+)
+Die Produkte werden über eine GET-Request aus dem Backend gesammelt und durch das State-Management in React auf die products-Konstante gesetzt. Diese wird bei jedem Laden der Seite erneut mit den aktuellsten Produkten aus dem Backend aktualisiert. Zusätzlich wird ein Loading-Status verwaltet. Dieser kann auf der Seite einen Ladebalken anzeigen, wenn die Produkte noch nicht fertig aus dem Backend geladen wurden. So kann kommuniziert werden, dass es sich nicht um einen Fehler in der Applikation sondern um einen Ladevorgang handelt.
+#figure(
+  ```ts
+const [products, setProducts] = useState<any[]>([]);
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("/api/products");
+        const data = await response.json();
+        setProducts(data.products);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+  ```,
+  caption: [Aktualisieren der Produkte aus dem Backend, Quelle: Eigene Darstellung]
+)
+Diese Funktion kann nun in jedem Komponenten wiederverwendet werden, der Produkte aus dem Backend aktualisieren soll. 
+
+=== Laden von Produktdetails
+
+Um die Produktdetails eines einzelnen Produktes zu laden, wird folgende API-verwendet:
+#figure(
+  ```
+  GET /api/products/:id{[0-9]+}
+  ```
+)
+Die API liefert alle Informationen zu einem Produkt, und wird wie folgt vom Frontend implementiert:
+#figure(
+  ```ts
+  const { id } = useParams<{ id: string }>();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const response = await fetch(`/api/products/${id}`);
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+        const data = await response.json();
+        if (data && data.product) {
+          setProduct(data.product);
+        } else {
+          setProduct(null);
+        }
+      } catch (error) {
+        console.error("Error fetching product:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProduct();
+  }, [id]);
+  ```,
+  caption: [Laden der Produktdetails eines einzelnen Produktes über die API, Quelle: Eigene Darstellung]
+)
+Es wird anhand der Produkt-ID auf die korrekte API zugegriffen, und das Produkt wird über das React State-Management geladen. Hier wird ebenfalls eine Loading-Variable verwendet um im Frontend den Ladevorgang anzeigen zu können.
+
+=== Hinzufügen eines Produktes
+
+Um ein Produkt der Backend-Datenbank hinzuzufügen wird folgende API und Methode verwendet:
+#figure(
+  ```
+  POST /api/product
+  ```
+)
+Es wird die POST-Methode der Produkt-Route verwendet. Nach der API-Dokumentation benötigt ein Produkt einen Namen, einen Preis, eine Kategorien-ID, eine Anzahl, und optional eine Beschreibung und ein Bild. Das Hinzufügen wird folgendermaßen realisiert:
+#figure(
+  ```ts
+  const [products, setProducts] = useState<Product[]>([]);
+  const [newProduct, setNewProduct] = useState<Partial<Product>>({
+    productName: "",
+    description: "",
+    price: "",
+    categoryID: 1,
+    availability: 0,
+    image: "",
+  });
+
+  useEffect(() => {
+  const handleAddProduct = async () => {
+      try {
+        if (imageFile) {
+          const base64Image = await convertToBase64(imageFile);
+          newProduct.image = base64Image.split(",")[1]; // Remove the data URL prefix
+        }
+
+        const response = await fetch("/api/products", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newProduct),
+        });
+
+        if (!response.ok) {
+          throw new Error(`Error: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        setProducts([...products, data.result[0]]);
+
+      } catch (error) {
+        console.error("Error adding product:", error);
+      }
+    };
+  }
+  ```,
+  caption: [Hinzufügen eines neuen Produktes über die POST-Methode der Produkte-API, Quelle: Eigene Darstellung]
+)
+Hier wird über das React State-Management ein neues Produkt erstellt und an die API übergeben. Dieses Produkt kann von den Elementen eines Komponenten verändert werden, zum Beispiel durch ein Form-Element im Admin-Bereich. Es wird zusätzlich zu den restlichen Produkteigenschaften überprüft ob ein Bild vorhanden ist, und dieses für die Datenbank im Backend in einen Base64-String umgewandelt. 
+
+=== Ändern eines Produktes
+
+Um ein Produkt zu ändern, muss die PUT-Methode des jeweiligen Produktes aufgerufen werden:
+#figure(
+  ```
+  PUT /api/products/:id{[0-9]+}
+  ```
+)
+
+== Nutzerinformationen
+Manche Komponente benötigen Informationen über den aktuellen Nutzer. So soll zum Beispiel der Name des Nutzers ausgelesen werden, oder seine ID für weitere Requests an das Backend verwendet werden. Um Informationen über den aktuellen Nutzer zu erhalten wird folgende API verwendet:
+#figure(
+  ```
+  GET /api/me
+  ```
+)
+Diese API liefert den aktuellen Nutzer zurück, und kann wie folgt aus dem Frontend aufgerufen werden:
+#figure(
+  ```ts
+  const [userID, setUserID] = useState(null);
+
+  useEffect(() => {
+    const getUser = async () => {
+      try {
+        const response = await fetch("/api/me");
+
+        if (response.status === 401) {
+          setUserID("0");
+          return;
+        }
+
+        const data = await response.json();
+        const user = data.user;
+        setUserID(user.id);
+      } catch (error) {
+        console.error("Fehler beim Laden des Benutzers:", error);
+      }
+    };
+
+    getUser();
+  }, []);
+  ```,
+  caption: [Laden des Nutzers, Quelle: Eigene Darstellung]
+)
+Falls der Nutzer noch nicht eingeloggt ist, wird die API einen 401-Code zurückgeben, der Zugriff ist also nicht autorisiert. Ist der Nutzer eingeloggt, wird eine valide Nutzer-ID des aktuellen Nutzers zurückgegeben. Diese wird dann über das React-State Management gespeichert.
+
+== Warenkorb
