@@ -126,3 +126,87 @@ Logo:
   url:
     date: 2024-05-22
     value: https://de.freelogodesign.org/
+
+Bun:
+  type: web
+  title: Bun
+  url:
+    date: 2024-06-12
+    value: https://bun.sh/
+
+BunvsJS:
+  type: web
+  title: Bun vs Node
+  url:
+    date: 2024-06-12
+    value: https://entwickler.de/javascript/ssr-bun-node-javascript
+
+Bun-Feautures:
+  type: web
+  title: Bun and its innovations
+  url:
+    date: 2024-06-12
+    value: https://b-nova.com/home/content/bun-and-its-innovations/
+
+Hono:
+  type: web
+  title: Hono
+  url:
+    date: 2024-06-12
+    value: https://hono.dev/
+
+HonovsExpress:
+  type: web
+  title: Hono vs. Express
+  url:
+    date: 2024-06-12
+    value: https://blog.probirsarkar.com/hono-js-vs-express-js-d67108e92ffa
+
+Hono-Benchmark:
+  type: web
+  title: Hono - Benchmarks
+  url:
+    date: 2024-06-12
+    value: https://hono.dev/concepts/benchmarks#bun
+
+Typescript:
+  type: web
+  title: Typescript
+  url:
+    date: 2024-06-12
+    value: https://www.typescriptlang.org/why-create-typescript/
+
+Zod:
+  type: web
+  title: Zod
+  url:
+    date: 2024-06-12
+    value: https://zod.dev/
+
+KindeAuth:
+  type: web
+  title: Kinde Auth
+  url:
+    date: 2024-06-12
+    value: https://docs.kinde.com/
+
+Verizon:
+  type: web
+  title: Verizon
+  url:
+    date: 2024-06-12
+    value: https://www.verizon.com/business/resources/reports/dbir/2022/summary-of-findings/
+
+SQLite:
+  type: web
+  title: SQLite
+  url:
+    date: 2024-06-12
+    value: https://www.sqlite.org/docs.html
+
+Drizzle:
+  type: web
+  title: SQLite
+  url:
+    date: 2024-06-12
+    value: https://orm.drizzle.team/

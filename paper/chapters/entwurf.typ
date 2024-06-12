@@ -1,11 +1,11 @@
-= Technologieauswahl
+= Backend Technologieauswahl
 In diesem Kapitel wird der Entwurf des Systems beschrieben. Ziel des Kapitels ist es, einen detaillierten Überblick über die Systemarchitektur und die Technologieauswahl zu geben sowie die einzelnen Komponenten des Systems darzustellen. Es wird erläutert, warum bestimmte Technologien und Architekturen gewählt wurden und wie die verschiedenen Komponenten des Systems miteinander interagieren.
 
 Zunächst wird die Auswahl der verwendeten Technologien und Frameworks begründet. Anschließend wird die Systemarchitektur detailliert beschrieben, gefolgt vom Datenbankentwurf und dem API-Design. Ein weiterer Abschnitt widmet sich der Implementierung der Authentifizierung und Benutzerverwaltung, gefolgt von der Datenvalidierung. Die Backend-Logik wird ebenfalls im Detail erläutert.
 
 == Bun 
 Bun ist eine JavaScript-Runtime Umgebung für den Server, die anders als Node.js oder Deno nicht auf der V8-Engine basiert, sondern auf einer eigenen JavaScript-Engine, welche mithilfe von Apples WebKit Engine implementiert wurde. Bun wurde zudem in einer "low-level general" Programmiersprache namens Zig geschrieben, welche von Rust und C inspiriert ist. Die Entscheidung für Bun fiel aufgrund der hohen Performance und Sicherheit, die durch die Verwendung von Zig und der WebKit-Engine gewährleistet wird.
-Bun ermöglicht es, serverseitige Anwendungen in JavaScript zu entwickeln und auszuführen. Bun wurde von Jarred Summer entwickelt und ist eine Open-Source-Software, die unter der MIT-Lizenz veröffentlicht wird. Die erste offizielle Version von Bun (Bun 1.0) wurde im September 2023 veröffentlicht.
+Bun ermöglicht es, serverseitige Anwendungen in JavaScript zu entwickeln und auszuführen. Bun wurde von Jarred Summer entwickelt und ist eine Open-Source-Software, die unter der MIT-Lizenz veröffentlicht wird. Die erste offizielle Version von Bun (Bun 1.0) wurde im September 2023 veröffentlicht @Bun.
 
 === Funktionen von Bun 
 Bun bietet eine Reihe von Funktionen, die es zu einer Plattform für die Entwicklung von serverseitigen Anwendungen machen. Dazu gehören:
@@ -20,7 +20,7 @@ Bun bietet eine Reihe von Funktionen, die es zu einer Plattform für die Entwick
 - Cross-Plattform-Unterstützung
 
 === Bun vs. Node.js
-Anders als Node.js ist bun nicht auf npm angewiesen und benötigt keine externen Abhängigkeiten zur Ausführung. Stattdessen wird eine integrierte Standardbibliothek verwendet, die Funktionen wie HTTP-Server, Dateisystemzugriff und Netzwerkkommunikation bereitstellt. Dies macht die Entwicklung und Bereitstellung von Anwendungen mit Bun einfacher und sicherer. Bun basiert zudem anders als Node.js nicht auf der von Google entwickelten V8-Engine, sondern auf einer Erweiterung von JavaScriptCore, die von Apple entwickelt und bereitgestellt wird. JSC priorisiert schnellere Startzeiten und geringeren Speicherverbrauch, was zu einer etwas langsameren Ausführungsgeschwindigkeit führt. V8 priorisiert hingegen die Ausführungsgeschwindigkeit mit mehr Runtime-Optimierungen, was zu einem höheren Speicherverbrauch führen kann. Das führt dazu, dass Bun bis zu 4xmal so schnell startet als Node.js 
+Anders als Node.js ist bun nicht auf npm angewiesen und benötigt keine externen Abhängigkeiten zur Ausführung. Stattdessen wird eine integrierte Standardbibliothek verwendet, die Funktionen wie HTTP-Server, Dateisystemzugriff und Netzwerkkommunikation bereitstellt. Dies macht die Entwicklung und Bereitstellung von Anwendungen mit Bun einfacher und sicherer. Bun basiert zudem anders als Node.js nicht auf der von Google entwickelten V8-Engine, sondern auf einer Erweiterung von JavaScriptCore, die von Apple entwickelt und bereitgestellt wird. JSC priorisiert schnellere Startzeiten und geringeren Speicherverbrauch, was zu einer etwas langsameren Ausführungsgeschwindigkeit führt. V8 priorisiert hingegen die Ausführungsgeschwindigkeit mit mehr Runtime-Optimierungen, was zu einem höheren Speicherverbrauch führen kann. Das führt dazu, dass Bun viermal so schnell startet als Node.js @BunvsJS.
 #figure(
   image("/paper/assets/startbun.png", width: 70%),
   caption: [Bun vs. Node.js - Startzeitvergleich, Quelle: Builder.io],
@@ -34,10 +34,10 @@ Die Benchmark-Ergebnisse, welche in Abbildung 6 gezeigt werden, zeigen eine Verb
 
 Während Node.js eine gute Runtime-Umgebung für JavaScript ist, werden TypeScript Dateien in Node.js nicht direkt unterstützt. TypeScript-Dateien müssen zuerst in JavaScript-Dateien kompiliert werden, bevor sie in Node.js ausgeführt werden können. Bun hingegen unterstützt TypeScript-Dateien direkt, was die Entwicklung von serverseitigen Anwendungen in TypeScript vereinfacht. TypeScript-Dateien können direkt mit dem Befehl bun "Dateiname.ts" ausgeführt werden.
 
-Deshalb wurde Bun als Server-Runtime für die Entwicklung des Webshops gewählt, da es eine hohe Performance, Sicherheit und TypeScript-Unterstützung bietet und die Entwicklung von serverseitigen Anwendungen in JavaScript und TypeScript vereinfacht.
+Deshalb wurde Bun als Server-Runtime für die Entwicklung des Webshops gewählt, da es eine hohe Performance, Sicherheit und TypeScript-Unterstützung bietet und die Entwicklung von serverseitigen Anwendungen in JavaScript und TypeScript vereinfacht @Bun-Feautures.
 
 == Hono
-Hono ist einfaches und ultraschnelles Web-Framework, welches auf jeder JavaScript-Runtime-Umgebung läuft. Entwickelt wurde Hono von Yusuke Wada und ist eine Open-Source-Software, die unter der MIT-Lizenz veröffentlicht wird. Hono wurde speziell für die Entwicklung von Webanwendungen und APIs entwickelt und bietet eine Reihe von Funktionen, die es zu einer leistungsstarken Plattform für die Entwicklung von Webanwendungen machen.
+Hono ist einfaches und ultraschnelles Web-Framework, welches auf jeder JavaScript-Runtime-Umgebung läuft. Entwickelt wurde Hono von Yusuke Wada und ist eine Open-Source-Software, die unter der MIT-Lizenz veröffentlicht wird. Hono wurde speziell für die Entwicklung von Webanwendungen und APIs entwickelt und bietet eine Reihe von Funktionen, die es zu einer leistungsstarken Plattform für die Entwicklung von Webanwendungen machen @Hono.
 
 === Vorteile von Hono
 Die Entscheidung für Hono als Web-Framework wurde aufgrund mehrerer Schlüsselfaktoren getroffen:
@@ -54,20 +54,13 @@ Die Entscheidung für Hono als Web-Framework wurde aufgrund mehrerer Schlüsself
 === Hono vs. Express.js
 Im Vergleich zu Express.js, einem der beliebtesten Web-Frameworks für Node.js, bietet Hono eine Reihe von Vorteilen:
 
-Vorteile von Hono:
-
   - Mikroservices-Architektur: Hono ist speziell für Mikroservices-Architekturen ausgelegt, was die Skalierbarkeit und Modularität von Anwendungen erleichtert.
 
   - Leistung und Skalierbarkeit: Hono bietet Leistungsbenchmarks und effiziente Anfrageverarbeitung, was besonders für hochskalierbare Anwendungen von Vorteil ist.
 
-  - Eingebaute WebSocket-Unterstützung: Hono bietet WebSocket-Unterstützung für die Implementierung von Echtzeitfunktionen an.
-
   - TypeScript-Unterstützung: Hono unterstützt TypeScript nativ, was für Typsicherheit und verbesserte Entwicklerwerkzeuge sorgt.
 
-  - Aktive Community-Wartung: Hono wird von einer aktiven Entwicklergemeinschaft gepflegt, was regelmäßige Updates und Verbesserungen gewährleistet.
-
-
-Deshalb wurde Hono als Web-Framework für die Entwicklung des Webshops gewählt, da es vorallem mit Kombination von Bun ultraschnell, effizient, leichtgewichtig, modular und vielseitig ist.
+Deshalb wurde Hono als Web-Framework für die Entwicklung des Webshops gewählt, da es vorallem mit Kombination von Bun ultraschnell, effizient, leichtgewichtig, modular und vielseitig ist @HonovsExpress.
 
 #table(
   columns: 6,
@@ -76,11 +69,12 @@ Deshalb wurde Hono als Web-Framework für die Entwicklung des Webshops gewählt,
   [Hono], 	[Node], 	[42,699.317], 	[60,797.19], 	[56,645.8], 	[10,654.96],
   [Express], [node], [16,461.68], [17,656.74], [16,615.32], [15,112.98],
 ) Die Ergebnisse sind in req/s gemessen<cluster-single-node>
+@Hono-Benchmark
 
 == TypeScript
 
 TypeScript ist eine von Microsoft entwickelte Programmiersprache, die eine strikte Typisierung für JavaScript bietet. Sie erweitert JavaScript um statische Typisierung, Klassen, Interfaces und Module, was die Entwicklung von großen und komplexen Anwendungen erleichtert. TypeScript wird zu JavaScript kompiliert und kann in jedem Browser und auf jedem Betriebssystem ausgeführt werden. Diese Eigenschaften tragen zur Steigerung der Produktivität von Entwicklern und zur Verbesserung der Codequalität bei.
-TypeScript erweitert JavaScript um zusätzliche Features wie Interfaces, Enums, Generics und Module. 
+TypeScript erweitert JavaScript um zusätzliche Features wie Interfaces, Enums, Generics und Module @Typescript. 
 Die Vorteile von TypeScript sind:
 
   1. Statische Typisierung
@@ -93,7 +87,7 @@ Aufgrund dieser Vorteile wurde TypeScript als primäre Programmiersprache für d
 
 == Zod
 
-Zod ist eine TypeScript-First-Schema-Validierungs-Bibliothek, die es Entwicklern ermöglicht, Datenstrukturen zu definieren und zu validieren. Zod bietet eine einfache und deklarative API zum Definieren von Schemas und zur Validierung von Daten. Zod ist speziell für TypeScript entwickelt und bietet eine nahtlose Integration mit der Sprache. Zod unterstützt eine Vielzahl von Datentypen, Validierungsregeln und Transformationen, die es Entwicklern ermöglichen, komplexe Datenstrukturen zu definieren und zu validieren.
+Zod ist eine TypeScript-First-Schema-Validierungs-Bibliothek, die es Entwicklern ermöglicht, Datenstrukturen zu definieren und zu validieren. Zod bietet eine einfache und deklarative API zum Definieren von Schemas und zur Validierung von Daten. Zod ist speziell für TypeScript entwickelt und bietet eine nahtlose Integration mit der Sprache. Zod unterstützt eine Vielzahl von Datentypen, Validierungsregeln und Transformationen, die es Entwicklern ermöglichen, komplexe Datenstrukturen zu definieren und zu validieren @Zod.
 
 === Vorteile von Zod
 
@@ -115,7 +109,7 @@ Zod wird im Webshop für die Validierung von Benutzereingaben, API-Anfragen und 
 
 
 == Kinde Auth 
-Kinde Auth ist eine Authentifizierung- und Benutzerverwaltungslösung, die speziell für SaaS-Anwendungen entwickelt wurde. Es bietet eine Vielzahl von Funktionen, die es Entwicklern ermöglichen, Benutzerkonten zu verwalten, Authentifizierung zu implementieren und Zugriffsrechte zu steuern. Dabei wird drauf geachtet, dass höchste Sicherheitsstandards eingehalten werden, um die Benutzerdaten zu schützen. Die Integration von Kinde Auth im Webshop ermöglicht es, Benutzerkonten zu erstellen, sich anzumelden und Zugriffsrechte zu verwalten. Dadurch wird eine robuste und flexible Authentifizierunginfrastruktur bereitgestellt, die den Anforderungen des Webshops entspricht, da im Webshop mit besonders sensiblen Daten gearbeitet wird. 
+Kinde Auth ist eine Authentifizierung- und Benutzerverwaltungslösung, die speziell für SaaS-Anwendungen entwickelt wurde. Es bietet eine Vielzahl von Funktionen, die es Entwicklern ermöglichen, Benutzerkonten zu verwalten, Authentifizierung zu implementieren und Zugriffsrechte zu steuern. Dabei wird drauf geachtet, dass höchste Sicherheitsstandards eingehalten werden, um die Benutzerdaten zu schützen. Die Integration von Kinde Auth im Webshop ermöglicht es, Benutzerkonten zu erstellen, sich anzumelden und Zugriffsrechte zu verwalten. Dadurch wird eine robuste und flexible Authentifizierunginfrastruktur bereitgestellt, die den Anforderungen des Webshops entspricht, da im Webshop mit besonders sensiblen Daten gearbeitet wird @KindeAuth. 
 
 === Typen von Authentifizierung bei Kinde Auth
 Kinde´s Authentifizierungssystem fokussiert sich hauptsächlich auf die Sicherheit und eine einfache Handhabung für die Benutzer. Es bietet verschiedene Arten von Authentifizierungsmethoden, die je nach Anwendungsfall ausgewählt werden können. Dazu gehören:
@@ -129,20 +123,18 @@ Für den Webshop wird die Passwordless Authentifizierung implementiert mit der m
 
 === Passwordlose Authentifizierung
 Zunächst stellt sich die Frage, warum eine Passwordlose Authentifizierung gewählt wurde und was die Vorteile sind.  
-Da es oft vorkommt, dass man sein eigenes Passwort vergisst oder es zu unsicher ist, verwenden Menschen, genauer gesagt zwei-drittel der Menschen, das gleiche Passwort für mehrere Dienste. Dies führt zu einer erhöhten Sicherheitslücke, da bei einem Datenleck die Zugangsdaten für mehrere Dienste kompromittiert sind. Die Passwordlose Authentifizierung bietet eine sichere und benutzerfreundliche Alternative zur herkömmlichen Passwortauthentifizierung. Dadurch fällt die Notwendigkeit für die Benutzer, sich ein Passwort zu merken, weg und erhöht die Sicherheit, da keine Passwörter im Klartext übertragen werden. Stattdessen wird ein einmaliger Token generiert und an den Benutzer gesendet, der zur Authentifizierung verwendet wird. Dieser Token ist nur für eine begrenzte Zeit gültig und kann nicht wiederverwendet werden, was die Sicherheit erhöht.
+Da es oft vorkommt, dass man sein eigenes Passwort vergisst oder es zu unsicher ist, verwenden Menschen, genauer gesagt zwei-drittel der Menschen, das gleiche Passwort für mehrere Dienste. Dies führt zu einer erhöhten Sicherheitslücke, da bei einem Datenleck die Zugangsdaten für mehrere Dienste kompromittiert sind. Die Passwordlose Authentifizierung bietet eine sichere und benutzerfreundliche Alternative zur herkömmlichen Passwortauthentifizierung. Dadurch fällt die Notwendigkeit für die Benutzer, sich ein Passwort zu merken, weg und erhöht die Sicherheit, da keine Passwörter im Klartext übertragen werden. Stattdessen wird ein einmaliger Token generiert und an den Benutzer gesendet, der zur Authentifizierung verwendet wird. Dieser Token ist nur für eine begrenzte Zeit gültig und kann nicht wiederverwendet werden, was die Sicherheit erhöht @KindeAuth.
 
 === Verringerung von Sicherheitsrisiken
-Die traditionelle Authentifizierung mittels Benutzername und Passwort birgt erhebliche Risiken für Benutzer und Unternehmen in Bezug auf Hackerangriffe und Cyberkriminalität. Laut dem 2022 Data Breach Investigations Report der amerikanischen Firma Verizon entfallen etwa 84 % aller Datenverletzungen auf Schwachstellen bei Anmeldeinformationen. Unsichere Passwörter, wie „password1234“, machen es Hackern leicht, über Brute-Force-Angriffe Zugang zu erhalten. Noch problematischer wird es, wenn Nutzer dieselben Anmeldedaten auf verschiedenen Websites verwenden – ein einziger Datenverstoß kann dann mehrere Systeme gefährden.
+Die traditionelle Authentifizierung mittels Benutzername und Passwort birgt erhebliche Risiken für Benutzer und Unternehmen in Bezug auf Hackerangriffe und Cyberkriminalität. Laut dem 2022 Data Breach Investigations Report der amerikanischen Firma Verizon entfallen etwa 84 % aller Datenverletzungen auf Schwachstellen bei Anmeldeinformationen. Unsichere Passwörter, wie „password1234“, machen es Hackern leicht, über Brute-Force-Angriffe Zugang zu erhalten. Noch problematischer wird es, wenn Nutzer dieselben Anmeldedaten auf verschiedenen Websites verwenden – ein einziger Datenverstoß kann dann mehrere Systeme gefährden @Verizon.
 
-Auch menschliche Fehler spielen eine Rolle: Das Notieren von Passwörtern auf Haftnotizen oder das unsichere Weitergeben von Anmeldedaten kann sowohl interne als auch externe Angriffe begünstigen. Diese Risiken lassen sich durch passwortlose Authentifizierungsmethoden vollständig vermeiden, da sie die beschriebenen Schwachstellen eliminieren.
-
-// Überarbeiten 
+Auch menschliche Fehler spielen eine Rolle: Das Notieren von Passwörtern auf Haftnotizen oder das unsichere Weitergeben von Anmeldedaten kann sowohl interne als auch externe Angriffe begünstigen. Diese Risiken lassen sich durch passwortlose Authentifizierungsmethoden vollständig vermeiden, da sie die beschriebenen Schwachstellen eliminieren @KindeAuth.
 
 == SQLite & Drizzle ORM
 SQLite ist eine relationale Datenbank, die auf SQL basiert und als Datei gespeichert wird. SQLite ist eine leichte und schnelle Datenbank, die keine Server-Infrastruktur erfordert und einfach in Anwendungen integriert werden kann. SQLite ist eine gute Wahl für Anwendungen, die eine lokale Datenbank benötigen und keine komplexe Server-Infrastruktur benötigen. SQLite unterstützt die meisten SQL-Features und bietet eine gute Performance für kleine bis mittlere Datenmengen. 
-Für den Webshop wird SQLite als Datenbank verwendet, da der Webshop ein Prototyp ist und keine komplexe Server-Infrastruktur benötigt. Für einen Produktivbetrieb könnte die Datenbank auf eine relationale Datenbank wie PostgreSQL oder MySQL migriert werden. 
+Für den Webshop wird SQLite als Datenbank verwendet, da der Webshop ein Prototyp ist und keine komplexe Server-Infrastruktur benötigt. Für einen Produktivbetrieb könnte die Datenbank auf eine relationale Datenbank wie PostgreSQL oder MySQL migriert werden @SQLite. 
 
-Drizzle ORM ist ein Object-Relational Mapping (ORM) Framework für SQLite, das es Entwicklern ermöglicht, Datenbankoperationen in JavaScript durchzuführen. Drizzle ORM bietet eine einfache und deklarative API zum Definieren von Datenmodellen und zur Ausführung von Datenbankabfragen. Drizzle ORM unterstützt die meisten SQL-Features und bietet eine gute Performance für Datenbankoperationen. Drizzle ORM wird im Webshop für die Datenbankoperationen verwendet, um Migrationsdatein zu erstellen und diese zu verfolgen, falls Änderungen getätigt wurden. Zudem wird Drizzle ORM für die Datenbankabfragen und die Datenmodellierung verwendet, um die Datenbankoperationen zu vereinfachen und zu beschleunigen.
+Drizzle ORM ist ein Object-Relational Mapping (ORM) Framework für SQLite, das es Entwicklern ermöglicht, Datenbankoperationen in JavaScript durchzuführen. Drizzle ORM bietet eine einfache und deklarative API zum Definieren von Datenmodellen und zur Ausführung von Datenbankabfragen. Drizzle ORM unterstützt die meisten SQL-Features und bietet eine gute Performance für Datenbankoperationen. Drizzle ORM wird im Webshop für die Datenbankoperationen verwendet, um Migrationsdatein zu erstellen und diese zu verfolgen, falls Änderungen getätigt wurden. Zudem wird Drizzle ORM für die Datenbankabfragen und die Datenmodellierung verwendet, um die Datenbankoperationen zu vereinfachen und zu beschleunigen @Drizzle.
 
 
 = Systemarchitektur
