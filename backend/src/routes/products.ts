@@ -106,7 +106,7 @@ export const productsRoute = new Hono()
       return c.notFound();
     }
     const deletedProduct = await db
-      .delete(productTable) // Add the table name as an argument
+      .delete(productTable) // Add the table name as an argument, unnötig fr
       .where(eq(productTable.productID, id))
       .returning();
 

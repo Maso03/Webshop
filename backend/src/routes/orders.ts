@@ -163,7 +163,7 @@ export const orderRoute = new Hono()
         order.products = order.products.map((product) => ({
           ...product,
           name:
-            productNameMap[product.name as number] || product.name.toString(), // Replace numeric ID with actual product name
+            productNameMap[product.name as number] || product.name.toString(),
         }));
       }
 

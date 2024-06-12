@@ -536,3 +536,245 @@ Im folgenden Code-Ausschnitt wird die Middleware checkIsAdmin verwendet, um die 
 
 Neben dem Zugriff auf die Benutzerdaten, welche die CRUD-Operationen beinhalten, kann der Admin auch auf die Bestellungen, Produkte und Produktkategorien zugreifen. Dabei wird überprüft, ob der Benutzer die erforderlichen Berechtigungen hat, um auf die Ressourcen zuzugreifen. Falls der Benutzer nicht über die erforderlichen Berechtigungen verfügt, wird eine "Forbidden"-Fehlermeldung zurückgegeben.
 
+
+= Authorisierte Routen 
+
+In diesem Kapitel wird auf die Implementierung der "Routen" des Webshops eingegangen, mit Fokus auf die Datenbankabfragen der einzelnen Routen.
+Dabei enthält jede Datei vier Methoden, POST, GET, DELETE und PUT.
+Um die Produkte des Webshops abzufragen, wird die GET-Methode verwendet, welche alle Produkte aus der Tabelle der Datenbank nimmt und als JSON-Objekt zurückgibt. Die CRUD-Operationen, verwenden die Standard SQL-Abfragen wie "SELECT", "SET", "UPDATE", "WHERE" und "FROM".
+
+== Produkte
+
+In der POST-Methode können vom Admin, Produkte hinzugefügt werden. Dabei wird er zValidator verwendet, um sicherzustellen dass, alle nötigen Attribute der Produkte versendet werden. Diese sind im folgenden Code zu sehen:
+#figure(
+  ```ts
+  // products.ts
+  const productSchema = z.object({
+  id: z.number().int().positive().min(1),
+  productName: z.string().min(2).max(255),
+  description: z.string().max(255).optional(),
+  price: z.string(),
+  categoryID: z.number().int().positive().min(1),
+  availability: z.number().int(),
+  image: z.string().optional(),
+});
+  ```,
+  caption: [zObjekt der Produkte, Quelle: Eigener Code]
+)
+
+Damit wird sichergestellt, dass die Produkte sicher in die Datenbank gespeichert werden.
+Dabei wird das Bild als ein Base64-Encodeter String gespeichert.
+
+Bei der DELETE-Methode wird das Produkt anhand der jeweiligen ID gelöscht. Dabei wird eine SQL-Abfrage ausgeführt um sicherzustellen, dass das Produkt existiert.
+
+Nach gleichem Schema verlaufen auch die Dateien "createShoppingcart.ts" und "shippingAddress.ts". Bei den Dateien "productCategories.ts", "shoppingCart.ts" und "orders.ts" werden die Tabellen miteinander gejoint um die Verbindungen zwischen den einzelnen Tabellen mithilfe der Fremdschlüssel herzustellen, um die jeweiligen Daten aus der Datenbank abzurufen.
+\
+\
+\
+== Produktkategorien
+In der "productCategories.ts" wird ein "innerJoin" ausgeführt, um das Produkt zur jeweiligen Kategorie zu finden.
+
+#figure(
+  ```ts
+  // productCategories.ts
+   const productCategories = await db
+      .select({
+        categoryID: productCategoryTable.categoryID,
+        categoryName: productCategoryTable.categoryName,
+        description: productCategoryTable.description,
+        description_product: productTable.description,
+        productID: productTable.productID,
+        productName: productTable.productName,
+        price: productTable.price,
+        availability: productTable.availability,
+      })
+      .from(productCategoryTable)
+      .innerJoin(
+        productTable,
+        eq(productCategoryTable.categoryID, productTable.categoryID)
+      );
+  ```,
+  caption: [InnerJoin der productCategories Datei, Quelle: Eigener Code]
+)
+\
+
+Danach werden die abgerufen Daten in ein Array von Produktkategorien formatiert, um eine sortierte Darstellung der Produkte zu erhalten.
+
+#figure(
+  ```ts
+  const formattedProductCategories = [];
+  ...
+      if (categoryIndex === -1) {
+        formattedProductCategories.push({
+          categoryID: product.categoryID,
+          categoryName: product.categoryName,
+          description: product.description,
+          products: [
+            {
+              productID: product.productID,
+              productName: product.productName,
+              price: product.price,
+              availability: product.availability,
+              description_product: product.description_product,
+            },
+          ],
+        });
+      } 
+      ...
+  ```,
+  caption: [Formatierung der Produkte, Quelle: Eigener Code]
+)
+== Einkaufswagen
+In der "shoppingCart" Datei werden zwei "innerJoins" verwendet um zunächst den jeweiligen Warenkorb zu finden und danach um das jeweilige Produkt aus der Datenbank zu finden. Danach wird mithilfe von einer "WHERE"-Klausel und "eq" die "user.id" abgeglichen. 
+Damit die Warenkörbe die Produkte anzeigen, werden diese Daten ebenfalls in ein Array formatiert.
+
+#figure(
+  ```ts
+  // shoppingCart.ts
+   const carts = await db
+      .select({
+        cartID: shoppingCartTable.cartID,
+        productID: cartItemsTable.productID,
+        productName: productTable.productName,
+        productPrice: productTable.price, 
+        productDescription: productTable.description,
+        quantity: cartItemsTable.quantity,
+      })
+      .from(shoppingCartTable)
+      .innerJoin(
+        cartItemsTable,
+        eq(shoppingCartTable.cartID, cartItemsTable.cartID)
+      )
+      .innerJoin(
+        productTable,
+        eq(cartItemsTable.productID, productTable.productID)
+      )
+      .where(eq(shoppingCartTable.userID, user.id));
+  ```,
+  caption: [Abfrage der Produkte des Warenkorbs, Quelle: Eigener Code]
+)
+
+Die anderen CRUD-Operationen verfolgen einfache Prinzipien, indem die Produkte mit "INSERT" eingefügt werden, mit "DELETE" gelöscht werden oder mit "UPDATE" aktualisiert werden.
+
+== Bestellungen
+Um die Bestellungen in die Datenbank zu speichern, muss man zunächst den Warenkorb des Benutzers, mithilfe von "innerJoins", abfragen. Falls Produkte vorhanden sind, wird der Gesamtpreis berechnet. Dieser setzt sich aus dem Preis des einzelnen Produktes zusammen, mal die Anzahl des Produktes. Am Schluss wird dieser Betrag addiert, um den Gesamtpreis des gesamten Warenkorbs zu erhalten 
+Wenn die Bestellung erfolgreich ist, wird in die Bestelltabelle ("orders"), alle nötigen Attribute, welche unten aufgelistet sind, eingefügt.
+#figure(
+  ```ts
+  // orders.ts
+      await db.insert(orderTable).values({
+        addressID: addressID,
+        userID: user.id, //user.id
+        cartID: cartItems[0].cartID,
+        totalPrice: totalPrice,
+        orderDate: new Date().toISOString(),
+        products: JSON.stringify(
+          cartItems.map((item) => ({
+            name: item.productID, 
+            price: item.price,
+            amount: item.quantity,
+          }))
+        ),
+      });
+  ```,
+  caption: [Erstellung der Bestellung, Quelle: Eigener Code]
+)
+
+Dabei werden alle einzelnen Produkte mitsamt deren Namen, Preis und Anzahl gespeichert.
+Zum Schluss wird der momentane Warenkorb, mithilfe der "DELETE"-Methode geleert.
+#figure(
+  ```ts
+  // orders.ts
+  ...
+    await db
+      .delete(cartItemsTable)
+      .where(eq(cartItemsTable.cartID, cartItems[0].cartID));
+  ...
+  ```,
+  caption: [Löschen der Artikel aus dem Warenkorb nach Bestellung, Quelle: Eigener Code]
+)
+
+Um die Bestellungen der Benutzer zu bekommen wird eine Typdefinition definiert. Diese enthält alle Attribute welche bei der Abfrage der Bestellungen angezeigt werden.
+#figure(
+  ```ts
+      type Order = {
+        ordersID: number;
+        userID: string;
+        shippingAddress: string;
+        city: string;
+        postalCode: string;
+        country: string;
+        totalPrice: number;
+        orderDate: string;
+        products: { name: number | string; price: number; amount: number }[];
+      };
+  ```,
+  caption: [Typdefinition für die Bestellungen, Quelle: Eigener Code]
+)
+
+
+#figure(
+  ```ts
+     const uniqueOrders: Order[] = ordersQuery.map((order) => ({
+        ordersID: order.ordersID,
+        userID: order.userID,
+        shippingAddress: order.shippingAddress,
+        city: order.city,
+        postalCode: order.postalCode,
+        country: order.country,
+        totalPrice: order.totalPrice,
+        orderDate: order.orderDate,
+        products: order.products
+          ? JSON.parse(order.products)
+          : ([] as { name: number; price: number; amount: number }[]),
+      }));
+  ```,
+  caption: [Mapping und Transformieren der Bestellungen, Quelle: Eigener Code]
+)
+In der "ordersQuery.map(...)" werden die Daten in ein neues Format tranformiert. Danach wird, falls Produkte existieren, von einem JSON-String in ein JavaScript-Objekt umgewandelt. Falls keine Produkte vorhanden sind, wird ein leeres Array von Produkten angelegt.
+
+#figure(
+  ```ts
+  // Alle Produkt-IDs sammeln
+  const allProductIds = uniqueOrders.flatMap((order) =>
+  order.products.map((product) => product.name as number)
+      );
+  ```,
+  caption: [Sammeln aller Produkt-IDs, Quelle: Eigener Code]
+)
+
+Die "flatMap(...)" extrahiert alle Produkt-IDs aus den Bestellungen und flacht das resultierende Array ab.
+
+#figure(
+  ```ts
+  const productNamesQuery = await db
+        .select({
+          productID: productTable.productID,
+          productName: productTable.productName,
+        })
+        .from(productTable)
+        .where(inArray(productTable.productID, allProductIds));
+
+      const productNameMap = productNamesQuery.reduce(
+        (map, product) => {
+          map[product.productID] = product.productName;
+          return map;
+        },
+        {} as { [key: number]: string }
+      );
+
+      // Produktnamen für jede Bestellung aktualisieren
+      for (const order of uniqueOrders) {
+        order.products = order.products.map((product) => ({
+          ...product,
+          name:
+            productNameMap[product.name as number] || product.name.toString(),
+        }));
+      }
+  ```,
+  caption: [Abrufen und Ersetzen der Produktnamen, Quelle: Eigener Code]
+)
+
+Zunächst wird eine Datenbankabfrage ausgeführt, um die Namen der Produkte zu erhalten, deren IDs in den Bestellungen enthalten sind. Die Ergebnisse dieser Abfrage werden in einer Map ("productNameMap") gespeichert. Die Schlüssel sind die Produkt-IDs und die Werte die entsprechenden Produktnamen. Anschließend werden die Bestellungen durchlaufen und die Produkt-IDs in den Bestellungsprodukten durch die tatsächlichen Produktnamen aus der "productNameMap" ersetzt. Falls ein Produktname nicht gefunden wird, bleibt die ID als String erhalten.
+
+Damit werden die Produkt-IDs aus den Bestellungen extrahiert, die entsprechenden Produktnamen werden aus der Datenbank abgefragt, und diese Namen werden dann in den Bestellungen anstelle der IDs eingesetzt.
