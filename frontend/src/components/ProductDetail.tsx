@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
@@ -17,6 +17,7 @@ const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -44,20 +45,47 @@ const ProductDetail: React.FC = () => {
 
   const handleAddToCart = async () => {
     if (!product) return;
-    /*
-    TODO: 
-    - Bei Login ein Cart für den User erstellen und ID speichern
-    - Bei Checkout (Mock Checkout) ein neues Cart erstellen und als aktuelles Cart setzen
-    */
+
     const cartItem = {
       productID: product.productID,
       cartID: Number(localStorage.getItem("cartId")),
-      quantity: 1,
+      quantity: 1, // Default quantity is 1
     };
 
-    console.log(cartItem);
+    // Prompt user to input quantity
+    const quantityInput = prompt("Enter quantity:");
+    if (!quantityInput || isNaN(Number(quantityInput))) {
+      alert("Invalid quantity. Please enter a number.");
+      return;
+    }
+
+    const quantity = Number(quantityInput);
+    if (quantity <= 0) {
+      alert("Quantity must be greater than 0.");
+      return;
+    }
+
+    cartItem.quantity = quantity;
 
     try {
+      // Update the product quantity in the backend
+      await fetch(`http://localhost:5173/api/products/${product.productID}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          availability: product.availability - quantity,
+          id: product.productID,
+          description: product.description,
+          price: String(product.price),
+          categoryID: product.categoryID,
+          productName: product.productName,
+          image: product.image,
+        }),
+      });
+
+      // Add the item to the shopping cart
       const response = await fetch("http://localhost:5173/api/shoppingCart", {
         method: "POST",
         headers: {
@@ -65,13 +93,16 @@ const ProductDetail: React.FC = () => {
         },
         body: JSON.stringify(cartItem),
       });
-      console.log(JSON.stringify(cartItem));
+
       if (!response.ok) {
         throw new Error(`Error: ${response.statusText}`);
       }
 
       const data = await response.json();
       console.log(data.result);
+
+      // Reload the page to reflect the updated quantity
+      navigate("/products");
     } catch (error) {
       console.error("Error adding product to cart:", error);
     }

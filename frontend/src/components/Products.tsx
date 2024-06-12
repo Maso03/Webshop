@@ -83,22 +83,43 @@ const Products: React.FC = () => {
           <p>Loading...</p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.map((product) => (
-              <Link
-                key={product.productID}
-                to={`/product/${product.productID}`}
-                className="bg-white p-4 rounded shadow-md hover:shadow-lg"
-              >
-                <h3 className="text-xl font-bold text-gray-800">
-                  {product.productName}
-                </h3>
-                <p className="text-gray-700">{product.description}</p>
-                <p className="text-green-500 font-bold">{product.price}€</p>
-                <p className="text-gray-500">
-                  Availability: {product.availability}
-                </p>
-              </Link>
-            ))}
+            {products.map((product) =>
+              product.availability > 0 ? (
+                <Link
+                  key={product.productID}
+                  to={`/product/${product.productID}`}
+                  className="bg-white p-4 rounded shadow-md hover:shadow-lg"
+                >
+                  <h3 className="text-xl font-bold text-gray-800">
+                    {product.productName}
+                  </h3>
+                  <p className="text-gray-700">{product.description}</p>
+                  <p className="text-green-500 font-bold">{product.price}€</p>
+                  <p className="text-gray-500">
+                    Availability: {product.availability}
+                  </p>
+                </Link>
+              ) : (
+                <div
+                  key={product.productID}
+                  className="bg-white p-4 rounded shadow-md relative"
+                >
+                  <h3 className="text-xl font-bold text-gray-800">
+                    {product.productName}
+                  </h3>
+                  <p className="text-gray-700">{product.description}</p>
+                  <p className="text-green-500 font-bold">{product.price}€</p>
+                  <p className="text-gray-500">
+                    Availability: {product.availability}
+                  </p>
+                  <div className="absolute inset-0 bg-red-600 bg-opacity-50 flex items-center justify-center">
+                    <span className="text-white text-2xl font-bold">
+                      OUT OF STOCK
+                    </span>
+                  </div>
+                </div>
+              )
+            )}
           </div>
         )}
       </main>

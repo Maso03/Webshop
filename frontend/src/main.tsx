@@ -11,6 +11,7 @@ import ProductDetail from "./components/ProductDetail";
 import AdminProducts from "./components/AdminPage";
 import ShoppingCartPage from "./components/Cart";
 import CheckoutPage from "./components/Checkout";
+import EditProducts from "./components/AdminEditProducts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -24,6 +25,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="/cart" element={<ShoppingCartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/admin/products/edit" element={<EditProducts />} />
       </Routes>
     </Router>
   </React.StrictMode>

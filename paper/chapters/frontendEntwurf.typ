@@ -366,7 +366,7 @@ Diese Designmerkmale und Prinzipien werden im nächsten Schritt verwendet um nic
 
 Es werden Prototypen für mehrere Seiten erstellt, um das Design und die Struktur des Webshops zu testen. Dafür wird statisches HTML verwendet, welches später dynamisch mit Elementen aus dem Backend des Webshops gefüllt wird. 
 
-=== Startseite
+=== Startseite und Navigationsleiste
 #figure(
   image("/paper/assets/prototype_landing_page.PNG", width: 80%),
   caption: [Der Prototyp der Startseite]
@@ -380,4 +380,11 @@ Sobald sich der Nutzer einloggt soll sich das Aussehen der Navigationsleiste lei
   image("/paper/assets/logged_in.PNG"),
   caption: [Rechter Teil der Navigationsleiste nach dem Einloggen]
 )
-Ein eingeloggter Nutzer wird neben der Suchleiste nun einen EInkaufswagen und ein Nutzer-Icon führen. Diese führen jeweils in den Einkaufswagen des Nutzers bzw. zu seinem Nutzerprofil.
+Ein eingeloggter Nutzer wird neben der Suchleiste nun einen Einkaufswagen und ein Nutzer-Icon sehen. Diese führen jeweils in den Einkaufswagen des Nutzers bzw. zu seinem Nutzerprofil. Der Login-Button wird hier durch einen Logout-Button ausgetauscht.
+
+=== Produkt-Browser
+#figure(
+  image("/paper/assets/prototype_products.PNG"),
+  caption: [Prototyp des Produkte-Browsers]
+)
+Der Produkte Browser (hier gefüllt mit Testprodukten) zeigt alle Produkte in Viererreihen. Der Name des Produkts ist fett gedruckt, mit einer Beschreibung darunter. Der Preis sticht durch eine grüne Färbung hervor. Die Verfügbarkeit wird in geringerer Deckkraft daruntergeschrieben. Eine Option zum sortieren nach dem Alphabet und nach Preis befindet sich in der oberen rechten Ecke. Durch einen Klick auf ein Produkt wird man auf die gegebene Produktseite weitergeleitet. 
