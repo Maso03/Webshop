@@ -79,11 +79,13 @@ const LandingPage: React.FC = () => {
     initializeCart();
   }, [isCartsLoaded]);
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center justify-center">
+    <div className="bg-gray-200 min-h-screen flex flex-col items-center justify-center">
       <NavBar />
-      <main className="container mx-auto flex-1 flex flex-col items-center justify-center text-center px-4">
-        <h2 className="text-4xl font-bold mb-4">Welcome to Our Webshop</h2>
-        <p className="text-gray-700 mb-8">
+      <main className="container mx-auto flex-1 flex flex-col items-center justify-center text-center px-4 py-8 mt-16">
+        <h2 className="text-4xl font-bold mb-4 text-gray-800">
+          Welcome to Our Webshop
+        </h2>
+        <p className="text-gray-600 mb-8">
           Discover the best products at amazing prices.
         </p>
         <Link

@@ -1,4 +1,4 @@
-= Entwurf Frontend
+= Frontend Technologieauswahl
 In diesem Abschnitt wird der Entwurf des Frontend-Systems beschrieben. Hier soll ein detaillierter Überblick über die Frontend-Technologieauswahl gegeben werden. Anschließend soll die Frontend-Architektur für die Entwicklung des Webshops aufgezeigt werden. Dazu gehören Übergangsdiagramme der Webseite, Wireframes der unterschiedlichen Seiten, und unterschiedliche Prototypen des visuellen Designs und Designschemas. 
 
 == Frontend-Framework
@@ -102,7 +102,7 @@ bun create vite webshop-app --template react
   caption: [Erstellen eines Webshop-Projektes mit Vite und React über Bun, Quelle: Eigene Darstellung]
 )
 
-== Frontend Designentscheidungen
+= Frontend Designentscheidungen
 
 Für das Frontend mussten unterschiedliche Designentscheidungen getroffen werden.
 
@@ -114,7 +114,7 @@ Für das Frontend mussten unterschiedliche Designentscheidungen getroffen werden
 
 Für den Aufbau der Webseite und den Routing-Optionen wird ein Routing-Diagramm erstellt. Für den Aufbau der unterschiedlichen Seiten des Webshops verwenden wir mehrere Wireframes, die die wichtigen Unterseiten darstellen. Für das Corporate Design wird eine Farbpalette und ein Logo gewählt, mit welcher dann eine Seite beispielhaft als Prototyp entworfen wird. 
 
-=== Routing der Webseite
+== Routing der Webseite
 
 Die Webseite benötigt für die Erfüllung der geforderten Funktionalitäten folgende Seiten:
 #list(
@@ -152,7 +152,7 @@ Einzelne Striche bedeuten hier einseitige Navigation, doppelte Striche stellen N
   caption: [Routing-Diagramm des Webshops, Quelle: Eigene Darstellung]
 )
 
-=== Wireframing
+== Wireframing
 Als nächster Schritt wurden Wireframes für die unterschiedlichen Seiten der Webseite entworfen. Diese enthalten nur die grobe Struktur der Seite und können sich im Entwicklungsprozess verändern. Es soll lediglich ein Grundriss sein, welche Elemente verfügbar sein sollen.
 
 Das Grundprinzip jeder Seite soll wie folgt aufgebaut sein: 
@@ -162,7 +162,7 @@ Das Grundprinzip jeder Seite soll wie folgt aufgebaut sein:
   [Ein Fußzeile mit Kontaktdaten und wichtigen Links zu z.B. Social-Media Pages des Webshops]
 )
 
-==== Startseite / Landing Page
+=== Startseite / Landing Page
 
 #figure(
   image("/paper/assets/wireframe_landing.PNG", width:50%),
@@ -178,14 +178,14 @@ Diese Anordnung an Komponenten sorgt für zwei Effekte:
 
 Somit wird die Kundenbindung und der Umsatz des Webshops möglicherweise bereits durch das Design der Startseite gesteigert.
 
-==== Waren Browser
+=== Waren Browser
 #figure(
   image("/paper/assets/wireframe_product_browser.PNG", width:50%),
   caption: [Wireframe des Produkt-Browsers des Webshops, Quelle: Eigene Darstellung]
 )
 Der Produktbrowser folgt ebenfalls dem Standard-Design. Die Suchleiste der Navigationsleiste wird auch im Warenbrowser verwendet um nach Artikeln zu suchen. Die Suchergebnisse sollen in der Mitte der Seite angezeigt und aufgelistet werden. Jedes Produkt soll dabei eine klickbare Fläche darstellen, auf dem Name, Beschreibung und Preis des Produktes zu sehen sind. So wird der Nutzer direkt mit den wichtigsten Informationen zu jedem Produkt versorgt bevor es überhaupt angeklickt wird. Für den zusätzlichen Nutzerkomfort soll sich über den Produkten eine Filterleiste befinden. Hier kann der Nutzer die Produkte z.B. alphabetisch, nach Preis, oder nach verfügbarer Anzahl sortieren. 
 #pagebreak()
-==== Produktdetails
+=== Produktdetails
 #figure(
   image("/paper/assets/wireframe_product_details.PNG", width:50%),
   caption: [Wireframe einer Produktseite des Webshops, Quelle: Eigene Darstellung]
@@ -201,7 +201,7 @@ Die Produktdetails werden angezeigt, nachdem der Nutzer auf eines der Produkte i
 
 Das Produktbild wird, falls verfügbar, auf dieser Seite gerendert. Über den Button "In den Warenkorb" soll der Artikel direkt in den Warenkorb des Benutzers gelegt werden. Zusätzlich soll hier ein kleines Pop-Up Fenster erscheinen, welches die Aktion bestätigt. 
 
-==== Warenkorb
+=== Warenkorb
 #figure(
   image("/paper/assets/wireframe_cart.PNG", width:50%),
   caption: [Wireframe des Warenkorbs des Webshops, Quelle: Eigene Darstellung]
@@ -210,7 +210,7 @@ Der Warenkorb soll dem Nutzer einerseits zeigen, welche Produkte sich gerade im 
 
 #pagebreak()
 
-==== Checkout
+=== Checkout
 #figure(
   image("/paper/assets/wireframe_product_checkout.PNG", width:50%),
   caption: [Wireframe des Checkout-Bildschirms des Webshops, Quelle: Eigene Darstellung]
@@ -225,7 +225,7 @@ Der Checkout-Prozess ist der letzte Schritt vor dem Abschluss des Kaufs und umfa
 )
 Zusätzlich sind auch hier die Standards vorhanden wie Kontaktdaten und eine Navigationsleiste.
 
-==== Benutzerprofil
+=== Benutzerprofil
 #figure(
   image("/paper/assets/wireframe_user.PNG", width:50%),
   caption: [Wireframe des Benutzerprofils des Webshops, Quelle: Eigene Darstellung]
@@ -240,7 +240,7 @@ Die Bestellungen werden als Liste dargestellt, mit einem Klick auf ein Element d
 )
 So kann der Nutzer bequem alle Details zu den vergangenen Bestellungen nachschauen.
 
-==== Admin-Bereich
+=== Admin-Bereich
 Der Admin-Bereich ist für den Webshop-Kunden unsichtbar, muss aber trotzdem eine effiziente Nutzung gewährleisten. Der Nutzer ist hierbei nicht der Webshop-Kunde sondern der Administrator des Webshops, welcher z.B. ein Beauftragter des Webshop-Unternehmens sein kann, der ein geringes technisches Verständnis hat. So muss auch der Admin-Bereich benutzerfreundlich sein. Der Administratorbereich soll über einen Klick auf die "Admin"-Schaltfläche der Navigationsleiste erreichbar sein. Diese Schaltfläche soll nur für verifizierte Administratoren nutzbar sein, und auch die beiden folgenden Seiten sollen nur diesen zugänglich sein.
 #figure(
   image("/paper/assets/wireframe_admin_dashboard.PNG", width:50%),
@@ -260,7 +260,7 @@ Der erste Unterteil des Adminbereiches ist für das Management von Produkten des
 
 Der zweite Unterteil des Adminbereiches ist für das Management von Accounts von Kunden des Webshops zuständig. Dem Admin wird eine Liste von allen Accounts präsentiert. Diese Accounts können dann über diese Liste gelöscht werden. Eine Rückkehr zum Dashboard ist auch hier über einen Button möglich. 
 #pagebreak()
-=== Corporate Design
+== Corporate Design
 
 Ein Corporate Design stellt ein einheitliches Design eines Unternehmens dar, welches intern und extern verwendet wird. Jedes Corporate Design besteht aus drei Komponenten:
 #list(
@@ -271,7 +271,7 @@ Ein Corporate Design stellt ein einheitliches Design eines Unternehmens dar, wel
 
 Diese drei Komponente sollen nun im Bezug auf den Webshop ermittelt werden.
 
-==== Markenidentität
+=== Markenidentität
 Wichtig für die Markenidentität ist, wofür die Marke stehen soll. Dabei soll die eigene Marke oft in drei Worten beschrieben werden. @Marke
 
 Für den Webshop soll eine Marke mit folgenden Stichworten entwickelt werden:
@@ -282,7 +282,7 @@ Für den Webshop soll eine Marke mit folgenden Stichworten entwickelt werden:
 )
 Mit solchen Schlagworten können nun die Basiselemente des Webshops entwickelt werden. 
 
-==== Basiselemente
+=== Basiselemente
 Die Basiselemente umfassen ein Logo und das Farbschema, das vom Team des Webshops verwendet werden soll. Da der Webshop bisher noch keinen Titel hat, soll hier auch ein potentieller Titel für das Unternehmen gewählt werden. 
 
 Für einen Titel sollte eine Kombination aus zwei kurzen Worten gewählt werden, die den Schlagworten der Markenidentität entsprechen. Für das Brainstorming wurde hier die Hilfe einer generativen KI in Bezug genommen, welche mit folgendem Prompt unterschiedliche Namen generiert hat:
@@ -337,4 +337,47 @@ Zusätzlich zu einem Namen und einer Tagline muss auch ein einprägsames Logo er
   )).join(),
   caption: [Die vier finalen Logo-Designs mit unterschiedlichen Farbpaletten]
 )
-Gleichzeitig wurde mit der Auswahl eines Logos auch die Farbpalette des Webshops ausgewählt. Die finale Entscheidung viel hier auf das Logo oben links. Der Mauszeiger in Kombination mit der Einkaufstasche, in schillernden Regenbogenfarben ergibt zusammen mit dem schwarzen Kontrast des Hintergrunds ein ideales junges, modernes und unternehmerisches Bild eines Webshops, welcher trendige Produkte an junge Erwachsene verkauft.
+
+Gleichzeitig wurde mit der Auswahl eines Logos auch die Farbpalette des Webshops ausgewählt. Die finale Entscheidung viel hier auf das Logo unten rechts. Der Lieferwagen in Kombination mit dem kompletten Haus, in angenehm blauen farben Farben ergibt zusammen mit dem orangenen Kontrast ein ideales junges, modernes und unternehmerisches Bild eines Webshops, welcher trendige Produkte an junge Erwachsene verkauft. Das Farbschema soll also aus folgenden Farben bestehen:
+
+#list(
+  [*Blaue* Komponente],
+  [*Weiß* oder helle Hintergründe],
+  [*Orange* Akzente und Highlights] 
+)
+
+#pagebreak()
+
+=== Anwendungen
+
+Damit das Corporate Design seine Wirkung auch erzielen kann, muss es angewendet werden. Dazu gehört die Auswahl der Elemente, die mit dem Corporate Design stilisiert werden. In dieser Studienarbeit wird nur ein Webshop entwickelt, weshalb keine weiteren externen Materialien wie Social Media Kanäle oder Werbematerial in das Corporate Design einbezogen werden müssen. Für den Webshop gelten folgende Designprinzipien, auf Grund des Corporate Designs:
+
+#list(
+  [Die HNavigationsleiste und die Fußleiste sollen in einem gräulichen Blauton gehalten werden],
+  [Der Hintergrund des Webshops soll in einer leicht weiß-grauen Farbe gehalten werden],
+  [Buttons sollen je nach Funktionalität in Blau (Bestätigung / Weiter) oder Orange (Abbruch / Zurück) gehalten werden]
+)
+
+Diese Designmerkmale und Prinzipien werden im nächsten Schritt verwendet um nichtfunktionale Prototypen der Webseite zu erstellen.
+
+#pagebreak()
+
+== Prototypen
+
+Es werden Prototypen für mehrere Seiten erstellt, um das Design und die Struktur des Webshops zu testen. Dafür wird statisches HTML verwendet, welches später dynamisch mit Elementen aus dem Backend des Webshops gefüllt wird. 
+
+=== Startseite
+#figure(
+  image("/paper/assets/prototype_landing_page.PNG", width: 80%),
+  caption: [Der Prototyp der Startseite]
+)
+
+Die Startseite, momentan noch ohne Funktionalität, zeigt wie die Navigationsleiste und die Fußleiste zum Corporate Design passen. Es werden gedämpfte blau-grau Töne für die Farbgestaltung der beiden Leisten verwendet. Der Link zur Startseite wird durch ein Bild des Logos ohne Hintergrund und Schrift realisiert, während der Einkaufswagen durch ein SVG-Icon eines Einkaufwagens dargestellt wird. Andere Links wie z.B. der Produktbrowser oder eine Kontaktseite mit wichtigen Informationen, sowie der Adminbereich können über Textmenüs aufgerufen werden. Die Fußzeile enthält Kontaktinformationen, den Namen des Unternehmens, sowie Links zu fiktiven Social-Media Seiten des Unternehmens. Als Beispiele wurden hier die Plattformen Instagram, X (ehemals Twitter), und Facebook genommen, deren Logos in Schwarz-Weißen Versionen als Links fungieren um den unteren Bildschirmrand nicht mit Text zu überladen. 
+
+Sobald sich der Nutzer einloggt soll sich das Aussehen der Navigationsleiste leicht ändern. Dazu wurde ein weiterer Prototyp der Navigationsleiste entwickelt.
+
+#figure(
+  image("/paper/assets/logged_in.PNG"),
+  caption: [Rechter Teil der Navigationsleiste nach dem Einloggen]
+)
+Ein eingeloggter Nutzer wird neben der Suchleiste nun einen EInkaufswagen und ein Nutzer-Icon führen. Diese führen jeweils in den Einkaufswagen des Nutzers bzw. zu seinem Nutzerprofil.

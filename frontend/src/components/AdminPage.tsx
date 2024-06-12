@@ -111,42 +111,54 @@ const Admin: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center">
+    <div className="bg-gray-200 min-h-screen flex flex-col items-center">
       <NavBar />
-      <main className="container mx-auto flex-1 flex flex-col items-center justify-center px-4 py-8">
-        <h2 className="text-4xl font-bold mb-4">Admin - Manage Products</h2>
+      <main className="container mx-auto flex-1 flex flex-col items-center justify-center px-4 py-8 mt-16">
+        <h2 className="text-4xl font-bold mb-4 text-gray-800">
+          Admin - Manage Products
+        </h2>
         {loading ? (
           <p>Loading...</p>
         ) : (
           <div className="w-full flex flex-col items-center">
             <div className="w-full max-w-4xl overflow-y-auto max-h-96 mb-8">
-              <table className="min-w-full bg-white">
+              <table className="min-w-full bg-white rounded-lg shadow-lg">
                 <thead>
                   <tr>
-                    <th className="py-2 px-4 border-b">Product Name</th>
-                    <th className="py-2 px-4 border-b">Description</th>
-                    <th className="py-2 px-4 border-b">Price</th>
-                    <th className="py-2 px-4 border-b">Availability</th>
-                    <th className="py-2 px-4 border-b">Actions</th>
+                    <th className="py-2 px-4 border-b text-gray-800">
+                      Product Name
+                    </th>
+                    <th className="py-2 px-4 border-b text-gray-800">
+                      Description
+                    </th>
+                    <th className="py-2 px-4 border-b text-gray-800">Price</th>
+                    <th className="py-2 px-4 border-b text-gray-800">
+                      Availability
+                    </th>
+                    <th className="py-2 px-4 border-b text-gray-800">
+                      Actions
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {products.map((product) => (
                     <tr key={product.productID}>
-                      <td className="py-2 px-4 border-b">
+                      <td className="py-2 px-4 border-b text-gray-800">
                         {product.productName}
                       </td>
-                      <td className="py-2 px-4 border-b">
+                      <td className="py-2 px-4 border-b text-gray-800">
                         {product.description}
                       </td>
-                      <td className="py-2 px-4 border-b">{product.price}€</td>
-                      <td className="py-2 px-4 border-b">
+                      <td className="py-2 px-4 border-b text-gray-800">
+                        {product.price}€
+                      </td>
+                      <td className="py-2 px-4 border-b text-gray-800">
                         {product.availability}
                       </td>
-                      <td className="py-2 px-4 border-b">
+                      <td className="py-2 px-4 border-b text-gray-800">
                         <button
                           onClick={() => handleRemoveProduct(product.productID)}
-                          className="px-2 py-1 bg-red-500 text-white rounded"
+                          className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600"
                         >
                           Remove
                         </button>
@@ -156,8 +168,10 @@ const Admin: React.FC = () => {
                 </tbody>
               </table>
             </div>
-            <div className="w-full max-w-4xl bg-white p-4 rounded shadow-lg">
-              <h3 className="text-2xl font-bold mb-4">Add New Product</h3>
+            <div className="w-full max-w-4xl bg-white p-4 rounded-lg shadow-lg mb-8">
+              <h3 className="text-2xl font-bold mb-4 text-gray-800">
+                Add New Product
+              </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                 <input
                   type="text"

@@ -59,20 +59,24 @@ const User: React.FC = () => {
   }
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col items-center">
+    <div className="bg-gray-100 min-h-screen flex flex-col">
       <NavBar />
-      <div className="w-[100%] pt-16">
-        <main className="container mx-auto p-4 bg-white shadow-md mt-4 w-full lg:w-2/3">
-          <h2 className="text-2xl font-bold mb-4">User Profile</h2>
+      <div className="w-full pt-16">
+        <main className="container mx-auto p-4 bg-white shadow-lg mt-4 w-full lg:w-2/3 rounded-lg">
+          <h2 className="text-2xl font-bold mb-4 text-gray-800">
+            User Profile
+          </h2>
 
           <section className="mb-6">
-            <h3 className="text-xl font-semibold mb-2">Past Purchases</h3>
+            <h3 className="text-xl font-semibold mb-2 text-gray-800">
+              Past Purchases
+            </h3>
             <ul className="list-disc list-inside">
               {orders.map((order) => (
                 <li
                   key={order.ordersID}
                   onClick={() => handlePurchaseClick(order)}
-                  className="cursor-pointer"
+                  className="cursor-pointer text-blue-500 hover:underline"
                 >
                   Order {order.ordersID}: Total - ${order.totalPrice.toFixed(2)}
                 </li>
@@ -86,22 +90,28 @@ const User: React.FC = () => {
       {isModalOpen && selectedPurchase && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
           <div className="bg-white p-4 rounded shadow-lg w-1/2">
-            <h3 className="text-xl font-bold mb-4">Purchase Details</h3>
-            <p>Order ID: {selectedPurchase.ordersID}</p>
-            <p>
+            <h3 className="text-xl font-bold mb-4 text-gray-800">
+              Purchase Details
+            </h3>
+            <p className="text-gray-700">
+              Order ID: {selectedPurchase.ordersID}
+            </p>
+            <p className="text-gray-700">
               Shipping Address: {selectedPurchase.shippingAddress},{" "}
               {selectedPurchase.city}, {selectedPurchase.postalCode},{" "}
               {selectedPurchase.country}
             </p>
-            <p>
+            <p className="text-gray-700">
               Order Date:{" "}
               {new Date(selectedPurchase.orderDate).toLocaleDateString()}
             </p>
-            <p>Total Price: ${selectedPurchase.totalPrice.toFixed(2)}</p>
-            <h4 className="font-semibold mt-4">Products:</h4>
+            <p className="text-gray-700">
+              Total Price: ${selectedPurchase.totalPrice.toFixed(2)}
+            </p>
+            <h4 className="font-semibold mt-4 text-gray-800">Products:</h4>
             <ul className="list-disc list-inside">
               {selectedPurchase.products.map((product, index) => (
-                <li key={index}>
+                <li key={index} className="text-gray-700">
                   {product.name}: ${product.price.toFixed(2)} x {product.amount}
                 </li>
               ))}

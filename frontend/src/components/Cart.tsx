@@ -78,17 +78,17 @@ const CartPage: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col">
+    <div className="bg-gray-200 min-h-screen flex flex-col">
       <NavBar />
       <main className="container mx-auto flex-1 flex flex-col items-center justify-center px-4 py-8 mt-16">
-        <h2 className="text-4xl font-bold mb-4">Shopping Cart</h2>
+        <h2 className="text-4xl font-bold mb-4 text-gray-800">Shopping Cart</h2>
         <div className="max-w-lg w-full">
           {cart.map((cartItem) => (
             <div
               key={cartItem.cartID}
-              className="bg-white p-4 mb-4 rounded shadow"
+              className="bg-white p-4 mb-4 rounded shadow-lg"
             >
-              <h3 className="text-lg font-semibold">
+              <h3 className="text-lg font-semibold text-gray-800">
                 Your cart ID: {cartItem.cartID}
               </h3>
               {cartItem.items.map((item) => (
@@ -96,10 +96,14 @@ const CartPage: React.FC = () => {
                   key={item.productID}
                   className="flex justify-between items-center border-b py-2"
                 >
-                  <div>{item.productName}</div>
+                  <div className="text-gray-800">{item.productName}</div>
                   <div className="text-right">
-                    <div>Price: {item.productPrice} €</div>
-                    <div>Quantity: {item.quantity}</div>
+                    <div className="text-gray-700">
+                      Price: {item.productPrice} €
+                    </div>
+                    <div className="text-gray-700">
+                      Quantity: {item.quantity}
+                    </div>
                   </div>
                   <button
                     onClick={() =>
@@ -112,8 +116,10 @@ const CartPage: React.FC = () => {
                 </div>
               ))}
               <div className="flex justify-between items-center mt-4">
-                <div className="font-semibold">Total Price:</div>
-                <div>{calculateTotalPrice(cartItem.items)} €</div>
+                <div className="font-semibold text-gray-800">Total Price:</div>
+                <div className="text-gray-700">
+                  {calculateTotalPrice(cartItem.items)} €
+                </div>
               </div>
             </div>
           ))}

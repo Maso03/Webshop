@@ -78,13 +78,13 @@ const ProductDetail: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex flex-col">
+    <div className="bg-gray-200 min-h-screen flex flex-col">
       <NavBar />
       <main className="container mx-auto flex-1 flex flex-col items-center justify-center px-4 py-8 mt-16">
         {loading ? (
           <p>Loading...</p>
         ) : product ? (
-          <div className="relative bg-white p-8 rounded shadow-lg max-w-2xl w-full text-center">
+          <div className="relative bg-white p-8 rounded shadow-lg w-full max-w-2xl text-center">
             <a
               href="/products"
               className="absolute top-4 left-4 text-gray-500 hover:text-gray-700"
@@ -93,27 +93,35 @@ const ProductDetail: React.FC = () => {
             >
               &#8592; {/* Unicode for left arrow */}
             </a>
-            <h2 className="text-4xl font-bold mb-4">{product.productName}</h2>
-            <p className="text-gray-600 mb-4">{product.description}</p>
-            <p className="text-green-500 font-bold text-2xl mb-4">
-              {product.price} €
-            </p>
-            <p className="text-gray-500 mb-4">
-              Availability: {product.availability}
-            </p>
-            {product.image && (
-              <img
-                src={product.image}
-                alt={product.productName}
-                className="mb-4 max-w-full h-auto"
-              />
-            )}
-            <button
-              onClick={handleAddToCart}
-              className="mt-6 px-4 py-2 bg-green-500 text-white font-bold rounded hover:bg-green-600"
-            >
-              Add to cart
-            </button>
+            <div className="flex flex-col md:flex-row justify-center items-center">
+              {product.image && (
+                <div className="md:mr-8 mb-4 md:mb-0 max-w-full md:max-w-xs">
+                  <img
+                    src={product.image}
+                    alt={product.productName}
+                    className="max-w-full h-auto rounded"
+                  />
+                </div>
+              )}
+              <div className="text-left">
+                <h2 className="text-4xl font-bold mb-4 text-gray-800">
+                  {product.productName}
+                </h2>
+                <p className="text-gray-600 mb-4">{product.description}</p>
+                <p className="text-green-500 font-bold text-2xl mb-4">
+                  {product.price} €
+                </p>
+                <p className="text-gray-500 mb-4">
+                  Availability: {product.availability}
+                </p>
+                <button
+                  onClick={handleAddToCart}
+                  className="mt-6 px-4 py-2 bg-green-500 text-white font-bold rounded hover:bg-green-600"
+                >
+                  Add to cart
+                </button>
+              </div>
+            </div>
           </div>
         ) : (
           <p>Product not found.</p>
