@@ -4,7 +4,7 @@ WF17:
   type: article
   title: Analysis on the Development and Bottlenecks of China's Cross - Border E – Commerce
   author:
-    - Yue Hongfei  
+    - Yue Hongfei
     - Wu Jiani
     - Yao, Lin
   organization: Studies in Asian Social Science
@@ -12,7 +12,6 @@ WF17:
   url:
     date: 2024-05-26
     value: https://www.unido.org/sites/default/files/2017-10/WP_17_2017.pdf
-
 
 B2B:
   type: article
@@ -26,7 +25,6 @@ B2B:
     date: 2024-05-26
     value: https://epb.bibl.th-koeln.de/frontdoor/deliver/index/docId/1152/file/PraxisPaper_Online+Marketing+für+B2B.pdf
 
-
 Dropshipping:
   type: article
   title: Dropshipping in E-Commerce - A Perspective
@@ -39,7 +37,6 @@ Dropshipping:
     date: 2024-05-26
     value: https://dl.acm.org/doi/10.1145/3271972.3271993
 
-
 Ecommerce:
   type: web
   title: Anzahl der Transaktionen über PayPal weltweit vom 1. Quartal 2010 bis zum 1. Quartal 2024
@@ -49,3 +46,83 @@ Ecommerce:
   url:
     date: 2024-05-26
     value: https://de.statista.com/statistik/daten/studie/300192/umfrage/transaktionen-ueber-paypal-weltweit-quartalszahlen/
+
+Introduction-React:
+  type: book
+  title: Introduction to React
+  author:
+    - Cory Gackenheimer
+  date: 2015
+  url:
+    date: 2024-06-11
+    value: https://link.springer.com/book/10.1007/978-1-4842-1245-5
+
+Bootstrap:
+  type: web
+  title: Bootstrap
+  url:
+    date: 2024-06-11
+    value: https://getbootstrap.com/
+
+Tailwind:
+  type: web
+  title: Tailwind CSS
+  url:
+    date: 2024-06-11
+    value: https://tailwindcss.com/
+
+CSS-Framework:
+  type: web
+  title: CSS Frameworks vs Custom CSS – What's the Difference?
+  author:
+    - John Ayebola
+  url:
+    date: 2024-06-11
+    value: https://www.freecodecamp.org/news/css-frameworks-vs-custom-css/
+
+Vite:
+  type: web
+  title: Vite Guide
+  author:
+    - Evan You
+    - Vite Contributors
+  url:
+    date: 2024-06-11
+    value: https://vitejs.dev/guide/
+
+Framework-Vergleich:
+  type: web
+  title: Svelte vs. Angular vs. React vs. Vue - wer gewinnt?
+  author:
+    - Sebastian Springer
+  url:
+    date: 2024-06-11
+    value: https://entwickler.de/javascript/svelte-angular-react-vue
+
+Corporate-Design:
+  type: web
+  title: Corporate Design - Was ist das und worauf kommt es an?
+  author:
+    - Websitebutler
+  url:
+    date: 2024-06-12
+    value: https://www.websitebutler.de/de/web-design/corporate-design-darauf-kommt-es-an
+
+Marke:
+  type: web
+  title: E-Commerce-Branding - Der komplette Guide zum Branding deines Onlineshops
+  author:
+    - Deanne de Bara
+  date: 2019
+  url:
+    date: 2024-06-12
+    value: https://99designs.de/blog/logo-und-branding/ecommerce-branding/
+
+Logo:
+  type: web
+  title: Erstelle dein kostenloses Logo in wenigen Minuten
+  author:
+    - FLD
+  url:
+    date: 2024-05-22
+    value: https://de.freelogodesign.org/
