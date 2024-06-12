@@ -50,7 +50,6 @@ const EditProducts: React.FC = () => {
             price: String(updatedProduct.price),
             categoryID: updatedProduct.categoryID,
             productName: updatedProduct.productName,
-            image: String(updatedProduct.image),
           }),
         }
       );

@@ -105,7 +105,7 @@ const LandingPage: React.FC = () => {
     );
     // Filter out products with higher stock
     const lowStockProducts = sortedProducts.filter(
-      (product, index) => index < count
+      (product, index) => index < count //Hier ist ein Error, kein Plan wie der weggehen soll aber wenn ich product entferne zerschießt es mir die komplette Landing Page
     );
     return lowStockProducts;
   };

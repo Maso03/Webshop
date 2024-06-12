@@ -33,6 +33,7 @@ const ProductDetail: React.FC = () => {
         } else {
           setProduct(null);
         }
+        console.log(product);
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -81,7 +82,6 @@ const ProductDetail: React.FC = () => {
           price: String(product.price),
           categoryID: product.categoryID,
           productName: product.productName,
-          image: product.image,
         }),
       });
 
