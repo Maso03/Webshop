@@ -8,7 +8,8 @@ import Products from "./components/Products";
 import User from "./components/User";
 import Contact from "./components/Contact";
 import ProductDetail from "./components/ProductDetail";
-import AdminProducts from "./components/AdminPage";
+import AdminPage from "./components/AdminPage";
+import AdminProducts from "./components/AdminProducts";
 import ShoppingCartPage from "./components/Cart";
 import CheckoutPage from "./components/Checkout";
 import EditProducts from "./components/AdminEditProducts";
@@ -22,6 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/user" element={<User />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/product/:id" element={<ProductDetail />} />
+        <Route path="/admin" element={<AdminPage />} />
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="/cart" element={<ShoppingCartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />

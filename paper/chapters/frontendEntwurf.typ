@@ -557,6 +557,26 @@ Um ein Produkt zu ändern, muss die PUT-Methode des jeweiligen Produktes aufgeru
   PUT /api/products/:id{[0-9]+}
   ```
 )
+Diese Methode wird dann aufgerufen, wenn einzelne Werte des Produktes geändert werden sollen, aber kein neues Produkt erstellt werden soll. So können z.B. über den Admin-Bereich Produkte editiert werden oder über die Bestellfunktion der Nutzer die Anzahl der Produkte die auf Lager sind reduziert werden. Hier ist die Funktion die für die aktualisierung des Lagerbestandes nach Kauf eines Produktes genutzt wird: 
+#figure(
+  ```ts
+  await fetch(`http://localhost:5173/api/products/${product.productID}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          availability: product.availability - quantity,
+          id: product.productID,
+          description: product.description,
+          price: String(product.price),
+          categoryID: product.categoryID,
+          productName: product.productName,
+        }),
+      });
+  ```
+)
+Hier wird die Verfügbarkeit des Produktes mit der vom Kunden bestellten Quantität reduziert und an das Backend weitergegeben, wo dann die Datenbank aktualisiert werden kann. Diese Request kann auch im Admin-Bereich für das Editieren von Produkten verwendet werden, dort wird allerdings nicht die Quantität automatisch reduziert.
 
 == Nutzerinformationen
 Manche Komponente benötigen Informationen über den aktuellen Nutzer. So soll zum Beispiel der Name des Nutzers ausgelesen werden, oder seine ID für weitere Requests an das Backend verwendet werden. Um Informationen über den aktuellen Nutzer zu erhalten wird folgende API verwendet:
@@ -596,3 +616,12 @@ Diese API liefert den aktuellen Nutzer zurück, und kann wie folgt aus dem Front
 Falls der Nutzer noch nicht eingeloggt ist, wird die API einen 401-Code zurückgeben, der Zugriff ist also nicht autorisiert. Ist der Nutzer eingeloggt, wird eine valide Nutzer-ID des aktuellen Nutzers zurückgegeben. Diese wird dann über das React-State Management gespeichert.
 
 == Warenkorb
+Die Erstellung und das Management des Warenkorbes wird beim ersten Laden der Startseite begonnen. Sobald sich ein Nutzer einloggt, wird überprüft, ob bereits ein Warenkorb für den Nutzer hinterlegt ist. Ansonsten wird ein neuer, dem Nutzer zugehöriger Warenkorb erstellt. Sollte eine 401 (Unauthorized) Antwort zurückgegeben werden, ist kein Nutzer eingeloggt und kein Warenkorb wird erstellt. Verwendet werden dafür die GET und POST Methoden der internen Warenkorb-API:
+#figure(
+  ```
+  POST /api/shoppingCart
+  GET  /api/shoppingCart
+  ```
+)
+
+= Implementation der Webshop Features

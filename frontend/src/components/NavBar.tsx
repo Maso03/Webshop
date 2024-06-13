@@ -41,7 +41,7 @@ const NavBar: React.FC = () => {
           <Link to="/contact" className="mr-4 text-white">
             Contact
           </Link>
-          <Link to="/admin/products" className="mr-4 text-white">
+          <Link to="/admin" className="mr-4 text-white">
             Admin
           </Link>
         </div>
