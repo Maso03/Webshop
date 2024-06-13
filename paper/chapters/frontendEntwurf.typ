@@ -624,4 +624,40 @@ Die Erstellung und das Management des Warenkorbes wird beim ersten Laden der Sta
   ```
 )
 
-= Implementation der Webshop Features
+= Finaler Webshop
+== Features
+Der fertig entwickelte Webshop bietet Kunden folgende Möglichkeiten:
+#list(
+  [*Anlegen* eines Benutzerkontos],
+  [Artikel *anzeigen*, *suchen*, und dem *Warenkorb hinzufügen*],
+  [Über den *Warenkorb* den Einkauf *prüfen*],
+  [Über die *Kasse* die Produkte *bestellen*],
+  [Über das Benutzerkonto die *Bestellhistorie einsehen*]
+)
+Zusätzlich wurden folgende Features für ein besseres Einkaufserlebnis hinzugefügt:
+#list(
+  [Möglichkeit, den Webshop ohne einen Account zu erkunden],
+  [Anzeige von Produkten mit geringer Verfügbarkeit so wie zufälligen Produkten auf der Startseite (Product-Recommendations)],
+)
+
+Die Administratoren des Webshops haben folgende zusätzliche Rechte:
+#list(
+  [Artikel *hinzufügen* und *ändern*],
+  [Warenbestand aller Artikel *anpassen*],
+  [Benutzerkonten *verwalten* bzw. *löschen*],
+  [Überblick auf letzte Bestellungen],
+  [Überblick auf die Performance des Webshops in den letzten 10 Tagen durch ein *Sales Graph*]
+)
+
+== Finale Seiten-Designs
+Im folgenden Abschnitt werden die endgültigen Designs der Seiten präsentiert, falls diese sich vom Wireframe bzw. Prototypen unterscheiden.
+=== Startseite
+#figure(
+  image("/paper/assets/final_lp.PNG"),
+  caption: [Endgültiges Design der Startseite mit Produktvorschlägen, Quelle: Eigener Webshop]
+)
+=== Admin-Bereich
+#figure(
+  image("/paper/assets/final_admin.PNG"),
+  caption: [Endgültiges Design des Admin-Bereiches mit letzten Bestellungen und Sales Graph, Quelle: Eigener Webshop]
+)

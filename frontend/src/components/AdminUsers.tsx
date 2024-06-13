@@ -13,6 +13,7 @@ const AdminUserPage: React.FC = () => {
       try {
         const response = await fetch("/api/admin/users");
         const data = await response.json();
+        console.log("USER DATA: ", data);
         if (response.ok) {
           setUsers(data.users);
         } else {
