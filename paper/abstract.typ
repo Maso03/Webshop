@@ -1,0 +1,9 @@
+Die vorliegende Studienarbeit an der DHBW Stuttgart widmete sich der Entwicklung eines modernen Webshops im E-Commerce-Bereich unter Berücksichtigung sowohl funktionaler als auch nicht-funktionaler Anforderungen. Ein zentraler Aspekt der Arbeit war die effektive Arbeitsteilung zwischen Backend- und Frontend-Entwicklung, um einen leistungsfähigen und benutzerfreundlichen Webshop zu realisieren.
+
+Die Analysephase umfasste die Definition der Anforderungen, die Zielgruppenanalyse sowie die Recherche und Analyse bestehender Webshops und E-Commerce-Strategien. Dabei wurden die funktionalen Anforderungen wie die Verwaltung von Benutzerkonten, die Such- und Filterfunktion, der Warenkorb und die Zahlungsabwicklung detailliert spezifiziert.
+
+Die Backend-Entwicklung konzentrierte sich auf die Auswahl und Implementierung der geeigneten Technologien wie Bun, um eine sichere und leistungsstarke Serverumgebung zu gewährleisten. Die Systemarchitektur, der Datenbankentwurf, das API-Design, die Authentifizierung und Benutzerverwaltung sowie die Datenvalidierung wurden detailliert beschrieben.
+
+Im Frontend wurden verschiedene Designentscheidungen getroffen, darunter der Aufbau der Webseite, die Routing-Optionen, die Gestaltung der Seiten und das Corporate Design des Webshops. Eine klare Sitemap und die Entwicklung von Wireframes ermöglichten eine strukturierte Umsetzung der Benutzeroberfläche, die die Bedürfnisse der Zielgruppe anspricht.
+
+Die erfolgreiche Arbeitsteilung zwischen Backend- und Frontend-Entwicklung sowie die Berücksichtigung funktionaler Anforderungen trugen  zur Realisierung eines leistungsfähigen und benutzerfreundlichen Webshops bei. Die kontinuierliche Weiterentwicklung und Anpassung an die sich wandelnden Anforderungen des E-Commerce sind in Zukunft entscheidend, um langfristig erfolgreich zu sein und eine hohe Benutzerzufriedenheit zu gewährleisten.

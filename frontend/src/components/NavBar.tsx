@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 const NavBar: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [user, setUser] = useState<null | { name: string }>(null);
+  const [isAdmin, setIsAdmin] = useState(false); // State to track admin status
   const navigate = useNavigate();
 
   const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -26,6 +27,25 @@ const NavBar: React.FC = () => {
       }
     };
     fetchUser();
+
+    // Check if the user is admin
+    const checkAdminStatus = async () => {
+      try {
+        const response = await fetch("/api/admin/users");
+        if (response.ok) {
+          const data = await response.json();
+          console.log(data);
+          // If request to /api/admin/users is successful, user is admin
+          setIsAdmin(true);
+        } else {
+          setIsAdmin(false);
+        }
+      } catch (error) {
+        setIsAdmin(false);
+        console.error("Failed to check admin status", error);
+      }
+    };
+    checkAdminStatus();
   }, []);
 
   return (
@@ -41,9 +61,11 @@ const NavBar: React.FC = () => {
           <Link to="/contact" className="mr-4 text-white">
             Contact
           </Link>
-          <Link to="/admin" className="mr-4 text-white">
-            Admin
-          </Link>
+          {user && ( // Conditionally render the Admin link
+            <Link to="/admin" className="mr-4 text-white">
+              Admin
+            </Link>
+          )}
         </div>
         <div className="flex items-center">
           <input

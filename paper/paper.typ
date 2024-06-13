@@ -14,4 +14,5 @@
 #include "./chapters/introduction.typ"
 #include "./chapters/entwurf.typ"
 #include "/paper/chapters/frontendEntwurf.typ"
+#include "/paper/chapters/abschluss.typ"
 #bibliography("./references.yml")

@@ -649,8 +649,8 @@ Die Administratoren des Webshops haben folgende zusätzliche Rechte:
   [Überblick auf die Performance des Webshops in den letzten 10 Tagen durch ein *Sales Graph*]
 )
 
-== Finale Seiten-Designs
-Im folgenden Abschnitt werden die endgültigen Designs der Seiten präsentiert, falls diese sich vom Wireframe bzw. Prototypen unterscheiden.
+== Hervorhebung besonderer Seiten-Designs
+Im folgenden Abschnitt werden die endgültigen Designs der Startseite und des Admin-Bereiches präsentiert, da diese sich vom Wireframe bzw. Prototypen unterscheiden.
 === Startseite
 #figure(
   image("/paper/assets/final_lp.PNG"),
@@ -660,4 +660,12 @@ Im folgenden Abschnitt werden die endgültigen Designs der Seiten präsentiert, 
 #figure(
   image("/paper/assets/final_admin.PNG"),
   caption: [Endgültiges Design des Admin-Bereiches mit letzten Bestellungen und Sales Graph, Quelle: Eigener Webshop]
+)
+#figure(
+  image("/paper/assets/final_admin_pm.PNG"),
+  caption: [Endgültiges Design des Admin-Produktmanagers zum Löschen und Bearbeiten von Produkten]
+)
+#figure(
+  image("/paper/assets/final_admin_um.PNG"),
+  caption: [Endgültiges Design des Admin-Benutzerkontenmanagement zum Löschen von Nutzerkonten]
 )
