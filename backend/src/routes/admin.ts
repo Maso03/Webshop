@@ -19,7 +19,7 @@ const checkIsAdmin = async (c: Context, next: Next) => {
     console.log("User Permissions:", permissions);
 
     const hasPermission = permissions.permissions.some(
-      (perm: string) => perm === "isadmin"
+      (perm: string) => perm === "isadmin" || "isadmin2"
     );
     console.log("Has permission:", hasPermission);
 
