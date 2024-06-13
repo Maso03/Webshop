@@ -122,6 +122,12 @@ const AdminProducts: React.FC = () => {
         >
           Edit Products
         </Link>
+        <Link
+          to="/admin"
+          className="px-4 py-2 bg-blue-900 text-white font-bold rounded hover:bg-blue-600 mb-4"
+        >
+          Back to Admin
+        </Link>
         {loading ? (
           <p>Loading...</p>
         ) : (

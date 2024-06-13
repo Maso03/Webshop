@@ -17,9 +17,25 @@ const ProductDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const response = await fetch("/api/me");
+        if (!response.ok) {
+          if (response.status === 401) {
+            setIsAuthenticated(false);
+          } else {
+            throw new Error(`Error: ${response.statusText}`);
+          }
+        }
+      } catch (error) {
+        console.error("Error checking authentication:", error);
+      }
+    };
+
     const fetchProduct = async () => {
       try {
         const response = await fetch(`/api/products/${id}`);
@@ -27,13 +43,11 @@ const ProductDetail: React.FC = () => {
           throw new Error(`Error: ${response.statusText}`);
         }
         const data = await response.json();
-        console.log("Fetched data:", data); // Log the response to debug
         if (data && data.product) {
-          setProduct(data.product); // Extract the first element
+          setProduct(data.product);
         } else {
           setProduct(null);
         }
-        console.log(product);
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -41,6 +55,7 @@ const ProductDetail: React.FC = () => {
       }
     };
 
+    checkAuthentication();
     fetchProduct();
   }, [id]);
 
@@ -50,10 +65,9 @@ const ProductDetail: React.FC = () => {
     const cartItem = {
       productID: product.productID,
       cartID: Number(localStorage.getItem("cartId")),
-      quantity: 1, // Default quantity is 1
+      quantity: 1,
     };
 
-    // Prompt user to input quantity
     const quantityInput = prompt("Enter quantity:");
     if (!quantityInput || isNaN(Number(quantityInput))) {
       alert("Invalid quantity. Please enter a number.");
@@ -69,7 +83,6 @@ const ProductDetail: React.FC = () => {
     cartItem.quantity = quantity;
 
     try {
-      // Update the product quantity in the backend
       await fetch(`http://localhost:5173/api/products/${product.productID}`, {
         method: "PUT",
         headers: {
@@ -85,7 +98,6 @@ const ProductDetail: React.FC = () => {
         }),
       });
 
-      // Add the item to the shopping cart
       const response = await fetch("http://localhost:5173/api/shoppingCart", {
         method: "POST",
         headers: {
@@ -101,7 +113,6 @@ const ProductDetail: React.FC = () => {
       const data = await response.json();
       console.log(data.result);
 
-      // Reload the page to reflect the updated quantity
       navigate("/products");
     } catch (error) {
       console.error("Error adding product to cart:", error);
@@ -122,7 +133,7 @@ const ProductDetail: React.FC = () => {
               aria-label="Back to products"
               style={{ fontSize: "2rem" }}
             >
-              &#8592; {/* Unicode for left arrow */}
+              &#8592;
             </a>
             <div className="flex flex-col md:flex-row justify-center items-center">
               {product.image && (
@@ -145,9 +156,17 @@ const ProductDetail: React.FC = () => {
                 <p className="text-gray-500 mb-4">
                   Availability: {product.availability}
                 </p>
+                {!isAuthenticated && (
+                  <p className="text-red-500 mb-4">Login to add product</p>
+                )}
                 <button
                   onClick={handleAddToCart}
-                  className="mt-6 px-4 py-2 bg-green-500 text-white font-bold rounded hover:bg-green-600"
+                  className={`mt-6 px-4 py-2 font-bold rounded ${
+                    isAuthenticated
+                      ? "bg-green-500 text-white hover:bg-green-600"
+                      : "bg-gray-500 text-gray-300 cursor-not-allowed"
+                  }`}
+                  disabled={!isAuthenticated}
                 >
                   Add to cart
                 </button>

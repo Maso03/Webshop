@@ -80,7 +80,9 @@ const AdminPage: React.FC = () => {
         </div>
         <div className="flex flex-col md:flex-row w-full">
           <div className="md:w-3/4 p-4">
-            <h3 className="text-2xl font-bold mb-4">Sales Graph</h3>
+            <h3 className="text-2xl font-bold mb-4">
+              Sales Graph: Last 10 Days
+            </h3>
             <div className="bg-white p-4 rounded shadow">
               <ResponsiveContainer width="100%" height={400}>
                 <LineChart data={chartData}>

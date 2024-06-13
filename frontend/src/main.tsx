@@ -10,6 +10,7 @@ import Contact from "./components/Contact";
 import ProductDetail from "./components/ProductDetail";
 import AdminPage from "./components/AdminPage";
 import AdminProducts from "./components/AdminProducts";
+import AdminUserPage from "./components/AdminUsers";
 import ShoppingCartPage from "./components/Cart";
 import CheckoutPage from "./components/Checkout";
 import EditProducts from "./components/AdminEditProducts";
@@ -28,6 +29,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         <Route path="/cart" element={<ShoppingCartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/admin/products/edit" element={<EditProducts />} />
+        <Route path="/admin/users" element={<AdminUserPage />} />
       </Routes>
     </Router>
   </React.StrictMode>
