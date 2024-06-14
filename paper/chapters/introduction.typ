@@ -75,3 +75,36 @@ Die Recherche und Analyse bestehender Webshops bietet wertvolle Einblicke in bew
 Zu den analysierten Aspekten gehören die Benutzerfreundlichkeit, das Design, die Navigationsstruktur und die Integration von Zahlungs- und Versandoptionen. Darüber hinaus werden auch Marketingstrategien und Kundenbindungsmaßnahmen bestehender Webshops untersucht, um deren Effektivität zu bewerten und gegebenenfalls zu adaptieren @B2B.
 
 Durch die Kombination aus theoretischem Wissen und praktischen Einblicken wird eine solide Grundlage für die Entwicklung eines leistungsfähigen und benutzerfreundlichen Webshops geschaffen.
+
+=== Amazon
+
+Amazon ist der größte Online-Versandhändler in Deutschland, und die Webseite amazon.com ist drittpopulärste Webseite in Deutschland (Siehe Abbildung 1). Daher kann der Internetauftritt von Amazon's Webshop als Inspiration für wichtige Features und Webseitendesign fungieren.
+
+Beim Besuch der Webseite werden sofort mehrere interessante Features bemerkt:
+#list(
+  [Dem Kunden werden direkt Produktangebote auf der Startseite gezeigt],
+  [Der Kunde kann ohne einen Account anzulegen durch den Webshop stöbern],
+  [Am oberen Bildschirmrand befindet sich eine Suchleiste, von der jederzeit Produkte gesucht werden können],
+  [Das Amazon-Logo befindet sich jederzeit in der oberen linken Ecke und fungiert als Navigationselement auf die Startseite]
+)
+
+Diese Features haben unterschiedliche Funktionen:
+
+Das sofortige Anzeigen von Produktangeboten sowie die Möglichkeit den Webshop ohne Account zu erkunden, verringert die Barriere zum Einstieg für einen Kunden, der den Webshop nutzen will. Würden sich auf der Startseite z.B. nur Kategorien befinden oder müsste der Nutzer zuerst einen Account anlegen um den Webshop nutzen zu können, dann würde ein großer Teil der möglichen Kunden abspringen, bevor sie überhaupt das erste Produkt gesehen haben. Dies verringert den Umsatz des Webshops, da potentielle Kunden verloren gehen und keinen Umsatz erzielen.
+
+Die konstanten Navigationselemente wie das Amazon-Logo als Navigation zur Startseite sowie die Suchleiste als schneller Weg zum Produktebrowser sind von allen Routen der Webseite aus verfügbar. Somit können Nutzer jederzeit auf die Startseite sowie auf gesuchte Produkte zugreifen. Wäre dies nicht der Fall, und der Nutzer müsste jedes Mal mühsam von einem Produkt zum nächsten navigieren, wird eine Hürde zwischen dem Nutzer und dem Kauf weiterer Produkte aufgebaut. Auch dies verringert den potentiellen Umsatz.
+
+Features wie eine permanente Navigationsleiste zu den Produktangeboten, sowie eine Möglichkeit sofort ohne Hindernisse auf Produkte zugreifen zu können, sind essentiell um ein angenehmen Nutzererlebnis sowie den Umsatz des Webshops zu steigern. Daher sollten diese Features in das Design des Webshops übernommen werden. 
+
+Zusätzlich zu diesen Features zeigt Amazon durch seine Größe eine immense Anzahl an weiteren Features auf, welche für den in dieser Studienarbeit entwickelten Prototypen nicht umsetzbar wären. Dazu gehören u.a. Funktionalitäten für Rücksendungen und Warenverfolgung und Einkaufsmöglichkeiten sowie Links zu weiteren digitalen Angeboten wie Amazon Prime oder Prime Video. Um einen Überblick über das Design eines kleineren Webshops zu erhalten soll im nächsten Schritt ein limitierterer Webshop analysiert werden. 
+
+=== Thalia
+
+Thalia ist ein kleinerer Online-Shop, welcher im Gegensatz zu Amazon eine limitiertere Auswahl an Produkten hat. Es wird sich auf Bücher, Höhrbücher, und Spielwaren begrenzt. Daher ist Thalia ein ideales Beispiel für einen kleineren und in dieser Studienarbeit umsetzbaren Webshop. Auch auf Thalia.de finden wir persönliche Angebote und hervorgehobene Produkte, sowie konstante Navigationselemente. Diese sind für einen Webshop imperativ und werden daher von Webshops aller Größen angewandt.
+
+Im Gegensatz zu Amazon sehen wir hier aber ein deutlich konstanteres Farbschema. Während Amazon unterschiedliche Medialelemente verwendet, ist auf Thalia ein Weiß-Blaues Farbschema konstant durch die Webseitengestaltung erkennbar. Dieses konstante Farbschema gehört zum Corporate Design von Thalia, und ist besonders für Webshops mit begrenzter Produktauswahl wichtig, um dem Webshop eine distinkte Identität zu geben. Das Thema Corporate Design sollte also auch für den in dieser Studienarbeit entwickelten Webshop thematisiert werden. Im Rahmen dessen soll der Webshop eine klare Corporate Identity zugewiesen bekommen, wozu folgende Elemente zu entwerfen sind:
+#list(
+  [Ein interessanter Name],
+  [Ein einprägsames Logo],
+  [Ein markantes Farbschema]
+)
