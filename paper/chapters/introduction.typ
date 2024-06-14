@@ -76,9 +76,14 @@ Zu den analysierten Aspekten gehören die Benutzerfreundlichkeit, das Design, di
 
 Durch die Kombination aus theoretischem Wissen und praktischen Einblicken wird eine solide Grundlage für die Entwicklung eines leistungsfähigen und benutzerfreundlichen Webshops geschaffen.
 
-=== Amazon
+=== Amazon: Kernelemente und Features
 
 Amazon ist der größte Online-Versandhändler in Deutschland, und die Webseite amazon.com ist drittpopulärste Webseite in Deutschland (Siehe Abbildung 1). Daher kann der Internetauftritt von Amazon's Webshop als Inspiration für wichtige Features und Webseitendesign fungieren.
+
+#figure(
+  image("/paper/assets/amazon_landing.PNG"),
+  caption: [Die Startseite des Amazon-Webshop, Quelle: amazon.de @Amazon]
+)
 
 Beim Besuch der Webseite werden sofort mehrere interessante Features bemerkt:
 #list(
@@ -98,13 +103,19 @@ Features wie eine permanente Navigationsleiste zu den Produktangeboten, sowie ei
 
 Zusätzlich zu diesen Features zeigt Amazon durch seine Größe eine immense Anzahl an weiteren Features auf, welche für den in dieser Studienarbeit entwickelten Prototypen nicht umsetzbar wären. Dazu gehören u.a. Funktionalitäten für Rücksendungen und Warenverfolgung und Einkaufsmöglichkeiten sowie Links zu weiteren digitalen Angeboten wie Amazon Prime oder Prime Video. Um einen Überblick über das Design eines kleineren Webshops zu erhalten soll im nächsten Schritt ein limitierterer Webshop analysiert werden. 
 
-=== Thalia
+=== Bauhaus: Corporate Design
 
-Thalia ist ein kleinerer Online-Shop, welcher im Gegensatz zu Amazon eine limitiertere Auswahl an Produkten hat. Es wird sich auf Bücher, Höhrbücher, und Spielwaren begrenzt. Daher ist Thalia ein ideales Beispiel für einen kleineren und in dieser Studienarbeit umsetzbaren Webshop. Auch auf Thalia.de finden wir persönliche Angebote und hervorgehobene Produkte, sowie konstante Navigationselemente. Diese sind für einen Webshop imperativ und werden daher von Webshops aller Größen angewandt.
+Bauhaus ist ein kleinerer Online-Shop, welcher im Gegensatz zu Amazon eine limitiertere Auswahl an Produkten hat. Es wird sich auf Baumarktartikel begrenzt. Daher ist Bauhaus ein ideales Beispiel für einen kleineren und in dieser Studienarbeit umsetzbaren Webshop. Auch auf Bauhaus.de finden wir persönliche Angebote und hervorgehobene Produkte, sowie konstante Navigationselemente. Diese sind für einen Webshop imperativ und werden daher von Webshops aller Größen angewandt.
+#figure(
+  image("/paper/assets/Bauhaus.PNG"),
+  caption: [Die Startseite des Bauhaus Online-Shop, Quelle: bauhaus.info @Bauhaus]
+)
 
-Im Gegensatz zu Amazon sehen wir hier aber ein deutlich konstanteres Farbschema. Während Amazon unterschiedliche Medialelemente verwendet, ist auf Thalia ein Weiß-Blaues Farbschema konstant durch die Webseitengestaltung erkennbar. Dieses konstante Farbschema gehört zum Corporate Design von Thalia, und ist besonders für Webshops mit begrenzter Produktauswahl wichtig, um dem Webshop eine distinkte Identität zu geben. Das Thema Corporate Design sollte also auch für den in dieser Studienarbeit entwickelten Webshop thematisiert werden. Im Rahmen dessen soll der Webshop eine klare Corporate Identity zugewiesen bekommen, wozu folgende Elemente zu entwerfen sind:
+Im Gegensatz zu Amazon sehen wir hier aber ein deutlich konstanteres Farbschema. Während Amazon unterschiedliche Medialelemente verwendet, ist auf Bauhaus ein Rot-Weißes Farbschema konstant durch die Webseitengestaltung erkennbar. Dieses konstante Farbschema gehört zum Corporate Design von Bauhaus, und ist besonders für Webshops mit begrenzter Produktauswahl wichtig, um dem Webshop eine distinkte Identität zu geben. Das Thema Corporate Design sollte also auch für den in dieser Studienarbeit entwickelten Webshop thematisiert werden. Bauhaus ist bereits eine etablierte Marke mit Präsenzgeschäften, und konnte daher das bereits existierende Corporate Design dieser Geschäfte auf den Webshop anwenden. Der zu entwickelnde Webshop für diese Studienarbeit kann sich nicht einem bereit existierenden Corporate Design bedienen. Im Rahmen dessen soll der Webshop eine klare neue Corporate Identity zugewiesen bekommen, wozu folgende Elemente zu entwerfen sind:
 #list(
   [Ein interessanter Name],
   [Ein einprägsames Logo],
   [Ein markantes Farbschema]
 )
+
+Diese Punkte werden im Rahmen der Webseitengestaltung in einem späteren Kapitel thematisiert. 
