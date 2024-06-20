@@ -29,7 +29,7 @@ const CheckoutPage: React.FC = () => {
     country: "",
   });
 
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setAddress({
       ...address,
       [e.target.name]: e.target.value,
