@@ -80,6 +80,11 @@ const ProductDetail: React.FC = () => {
       return;
     }
 
+    if (quantity > product.availability) {
+      alert("Quantity higher than availability.");
+      return;
+    }
+
     cartItem.quantity = quantity;
 
     try {
