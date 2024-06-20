@@ -86,6 +86,22 @@ const EditProducts: React.FC = () => {
     );
   };
 
+  if (localStorage.getItem("userID") != "kp_8f757fa69a7b41b78316a9482658ca0a") {
+    return (
+      <div className="bg-gray-200 min-h-screen flex flex-col items-center">
+        <NavBar />
+        <main className="container mx-auto flex-1 flex flex-col items-center justify-center text-center px-4 py-8 mt-16">
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-gray-800">
+              Not logged in as an admin
+            </h1>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="bg-gray-100 min-h-screen flex flex-col items-center">
       <NavBar />
